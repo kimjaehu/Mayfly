@@ -31,65 +31,27 @@
   </head>
 
   <body class="grey lighten-4">
-    <!-- Recipe -->
-    <div class="recipes container grey-text text-darken-1">
-      <h6 class="center">Recipes</h6>
-    </div>
-
-    <div class="center">
-      <a
-        class="btn-floating btn-small btn-large add-btn sidenav-trigger"
-        data-target="side-form"
-      >
-        <i class="material-icons">add</i>
-      </a>
-    </div>
-
-    <!-- sidemenu add recipe -->
-    <div id="side-form" class="sidenav side-form">
-      <form class="add-recipe container section">
-        <h6>New Recipe</h6>
-        <div class="divider"></div>
-        <div class="input-field">
-          <input
-            placeholder="e.g. Corn pizza"
-            id="title"
-            type="text"
-            class="validate"
-          />
-          <label for="title">Recipe Title</label>
-        </div>
-        <div class="input-field">
-          <input
-            placeholder="e.g. Corn, cheeze, garlic"
-            id="ingredients"
-            type="text"
-            class="validate"
-          />
-          <label for="ingredients">Ingredients</label>
-        </div>
-        <div class="input-field center">
-          <button class="btn-small">Add</button>
-        </div>
-      </form>
-    </div>
-
-    <a href="#" class="grey-text modal-trigger" data-target="modal-login"
-      >testing
-    </a>
-    <div id="modal-login" class="modal">
-      <div class="modal-content">
-        <h1 class="center">Jellyfish</h1>
+    <div class="login container grey-text text-darken-1" style="display: none;">
+      <h1 class="center">Jellyfish</h1>
+      <div>
         <div id="firebaseui-auth-container"></div>
         <div id="loader">Loading...</div>
       </div>
     </div>
 
+    <!-- About yourself -->
+    <div class="about container grey-text text-darken-1"> </div>
+
     <script src="/js/firebase.js"></script>
+    <script>
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
+
     <script src="/js/app.js"></script>
     <script src="/js/login.js"></script>
-    <script src="/js/auth.js"></script>
     <script src="/js/db.js"></script>
     <script src="/js/ui.js"></script>
+    <script src="/js/auth.js"></script>
   </body>
 </html>

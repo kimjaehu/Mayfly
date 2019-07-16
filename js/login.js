@@ -1,5 +1,4 @@
 (function() {
-  var auth = firebase.auth();
   var ui = new firebaseui.auth.AuthUI(auth);
   var uiConfig = {
     callbacks: {
@@ -48,6 +47,18 @@
 
   ui.start('#firebaseui-auth-container', uiConfig);
   auth.onAuthStateChanged(user => {
-    console.log(user);
+    console.log(user.uid);
+    if (user) {
+      db.collection('users')
+        .doc(user.uid)
+        .onSnapshot(snapshot => {
+          console.log(snapshot.data());
+          renderDashboard(snapshot.data());
+          loginUI(user);
+        });
+    } else {
+      loginUI();
+      renderDashboard([]);
+    }
   });
 })();

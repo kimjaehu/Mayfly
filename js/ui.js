@@ -1,4 +1,24 @@
-const recipes = document.querySelector('.recipes');
+const about = document.querySelector('.about');
+const loginDiv = document.querySelector('.login');
+
+const loginUI = user => {
+  if (user) {
+    loginDiv.style.display = 'none';
+  } else {
+    loginDiv.style.display = 'block';
+  }
+};
+
+const renderDashboard = data => {
+  // const aboutYourself = data[0].data();
+  console.log(data);
+  let html = `
+  <h6 class="center">About yourself</h6>
+  <div> ${data.test1} </div>`;
+  about.innerHTML = html;
+};
+
+const doNotRenderDashboard = () => {};
 
 document.addEventListener('DOMContentLoaded', function() {
   const modals = document.querySelectorAll('.modal');
