@@ -51,11 +51,16 @@
     if (user) {
       db.collection('users')
         .doc(user.uid)
-        .onSnapshot(snapshot => {
-          console.log(snapshot.data());
-          renderDashboard(snapshot.data());
-          loginUI(user);
-        });
+        .onSnapshot(
+          snapshot => {
+            console.log(snapshot.data());
+            renderDashboard(snapshot.data());
+            loginUI(user);
+          },
+          err => {
+            console.log(err.message);
+          }
+        );
     } else {
       loginUI();
       renderDashboard([]);
