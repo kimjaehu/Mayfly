@@ -10,19 +10,26 @@ const loginUI = user => {
 };
 
 const renderDashboard = data => {
-  // const aboutYourself = data[0].data();
-  console.log(data);
-  let html = `
-  <h6 class="center">About yourself</h6>
-  <div> ${data.test1} </div>`;
-  about.innerHTML = html;
+  // // const aboutYourself = data[0].data();
+  // console.log(data);
+  // let html = `
+  // <h6 class="center">About yourself</h6>
+  // <div> ${data.test1} </div>`;
+  // about.innerHTML = html;
 };
 
 const doNotRenderDashboard = () => {};
 
 document.addEventListener('DOMContentLoaded', function() {
-  const modals = document.querySelectorAll('.modal');
-  M.Modal.init(modals);
+  var elems = document.querySelectorAll('.datepicker');
+  var instances = M.Datepicker.init(elems, {
+    autoClose: true
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, {});
 });
 
 // render recipe

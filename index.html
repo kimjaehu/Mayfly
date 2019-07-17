@@ -30,9 +30,11 @@
     />
   </head>
 
-  <body class="grey lighten-4">
-    <div class="login container grey-text text-darken-1" style="display: none;">
+  <body class="blue-grey darken-1">
+    <!-- Login info -->
+    <div class="login container grey-text text-lighten-5" style="display: none;">
       <h1 class="center">Jellyfish</h1>
+      <h4 class="center">Welcome</h4>
       <div>
         <div id="firebaseui-auth-container"></div>
         <div id="loader">Loading...</div>
@@ -40,7 +42,109 @@
     </div>
 
     <!-- About yourself -->
-    <div class="about container grey-text text-darken-1"> </div>
+    <div class="about container grey-text text-darken-1">
+      <div class="card-panel white">
+        <form class="add-about container section">
+          <h6 class="center darken">About you</h6>
+          <div class="divider"></div>
+            <div class="row">
+              <div class="input-field">
+                <div class="col s6 m6">
+                  <label>
+                    <input name="gender" type="radio" value="Male"  checked/>
+                    <span>Male</span>
+                  </label>
+                </div>
+                <div class="col s6 m6">
+                  <label>
+                    <input name="gender" type="radio" value="Female" />
+                    <span>Female</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <input id="date_of_birth" type="text" class="datepicker" name="date_of_birth" required=""/>
+              <label for="date_of_birth">Date of birth</label>
+            </div>
+
+            <div class="row">
+            <div class="input-field with_unit col s6 m6">
+              <input id="height" name="height" type="text" class="validate" required=""/>
+              <span>cm</span>
+              <label for="height">Height</label>  
+            </div>
+          
+            <div class="input-field with_unit col s6 m6">
+              <input id="weight" name="weight" type="text" class="validate"/>
+              <span>kg</span>
+              <label for="weight">weight</label>
+            </div>
+          </div>
+            <div class="input-field">
+              <select type="select" id="smoking" name="smoking" required="">
+                <option value="" disabled selected>Do you smoke?</option>
+                <option value="heavy">Heavy (&#8805; 1 pack/day)</option>
+                <option value="light">Light (&#60; 1 pack/day)</option>
+                <option value="former">Former smoker</option>
+                <option value="never">Never smoked</option>
+              </select>
+            </div>
+
+            <div class="input-field">
+                <select id="alcohol" name="alcohol">
+                <option value="" disabled selected
+                  >How often do you drink?</option
+                >
+                <option value="binge">Binge (&#8805; 17 drinks/wk)</option>
+                <option value="heavy">Heavy (6 to 17 drinks/wk)</option>
+                <option value="moderate">Moderate (3 to 5 drinks/wk)</option>
+                <option value="light">Light (0 to 2 drinks/wk)</option>
+                <option value="occasional">Occasional (&#60; 1 drink/mo)</option>
+                <option value="no_alcohol">No alcohol in last 12 years</option>
+              </select>
+              <!-- <label>Alcohol</label> -->
+            </div>
+
+            <div class="input-field">
+                <select id="physical_activity" name="physical_activity">
+                <option value="" disabled selected>How active are you?</option>
+                <option value="inactive">Inactive</option>
+                <option value="moderate">Moderately active</option>
+                <option value="active">Active</option>
+              </select>
+              <!-- <label>Physical activity</label> -->
+            </div>
+
+            <div class="input-field">
+                <select id="diet" name="diet">
+                <option value="" disabled selected>How is your diet?</option>
+                <option value="very_poor">Very poor diet</option>
+                <option value="poor">Poor diet</option>
+                <option value="fair">Fair diet</option>
+                <option value="adequate">Adequate diet</option>
+              </select>
+              <!-- <label>diet</label> -->
+            </div>
+
+            <div class="input-field">
+                <select id="stress" name="stress">
+                <option value="" disabled selected>How stressed are you?</option>
+                <option value="high">High stress</option>
+                <option value="low">Low stress</option>
+              </select>
+              <!-- <label>Stress</label> -->
+            </div>
+          </div>
+
+          <div class="input-field center">
+            <button type="button" class="waves-effect waves-light btn-large">Submit</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
 
     <script src="/js/firebase.js"></script>
     <script>
