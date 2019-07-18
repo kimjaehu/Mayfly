@@ -10,6 +10,7 @@ db.enablePersistence().catch(err => {
 });
 
 //real time listener
+
 // db.collection('users')
 //   .doc(user.uid)
 //   .onSnapshot(snapshot => {
@@ -27,10 +28,10 @@ db.enablePersistence().catch(err => {
 //   });
 
 // add new recipe
-const form = document.getElementById('form');
-form.addEventListener('click', e => {
+const form = document.querySelector('form');
+form.addEventListener('submit', e => {
   e.preventDefault();
-  console.log(e);
+
   const about = {
     gender: form.gender.value,
     date_of_birth: form.date_of_birth.value,
@@ -43,12 +44,11 @@ form.addEventListener('click', e => {
     stress: form.stress.value
   };
   console.log(about);
-  // db.collection('recipes')
-  //   .add(recipe)
+  // console.log('uid', firebase.auth().currentUser);
+  // db.collection('users')
+  //   .doc(firebase.auth().currentUser.uid)
+  //   .update(about)
   //   .catch(err => console.log(err));
-
-  // form.title.value = '';
-  // form.ingredients.value = '';
 });
 
 // remove recipe

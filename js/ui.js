@@ -9,6 +9,42 @@ const loginUI = user => {
   }
 };
 
+const unitSwitch = document.getElementById('unit-switch');
+const metric = document.getElementById('metric');
+const imperial = document.getElementById('imperial');
+const imperialHeightFt = document.getElementById('imperial-height-ft');
+const imperialHeightIn = document.getElementById('imperial-height-in');
+const imperialWeight = document.getElementById('imperial-weight');
+const metricHeight = document.getElementById('metric-height');
+const metricWeight = document.getElementById('metric-weight');
+
+unitSwitch.addEventListener('click', e => {
+  console.log('asdfasdgas', e.target.checked);
+  if (e.target.checked) {
+    metric.style.display = 'block';
+    imperial.style.display = 'none';
+    metricHeight.required = true;
+    metricWeight.required = true;
+    imperialHeightFt.required = false;
+    imperialHeightIn.required = false;
+    imperialWeight.required = false;
+  } else {
+    metric.style.display = 'none';
+    imperial.style.display = 'block';
+    metricHeight.required = false;
+    metricWeight.required = false;
+    imperialHeightFt.required = true;
+    imperialHeightIn.required = true;
+    imperialWeight.required = true;
+  }
+});
+
+
+
+metric.addEventListener('onChange', e => {
+  console.log(e.target.value);
+});
+
 const renderDashboard = data => {
   // // const aboutYourself = data[0].data();
   // console.log(data);

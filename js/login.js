@@ -47,14 +47,14 @@
 
   ui.start('#firebaseui-auth-container', uiConfig);
   auth.onAuthStateChanged(user => {
-    console.log(user.uid);
+    // console.log(user.uid);
     if (user) {
       db.collection('users')
         .doc(user.uid)
         .onSnapshot(
           snapshot => {
             console.log(snapshot.data());
-            renderDashboard(snapshot.data());
+            // renderDashboard(snapshot.data());
             loginUI(user);
           },
           err => {
@@ -63,7 +63,7 @@
         );
     } else {
       loginUI();
-      renderDashboard([]);
+      // renderDashboard([]);
     }
   });
 })();
