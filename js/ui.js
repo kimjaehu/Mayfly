@@ -19,7 +19,6 @@ const metricHeight = document.getElementById('metric-height');
 const metricWeight = document.getElementById('metric-weight');
 
 unitSwitch.addEventListener('click', e => {
-  console.log('asdfasdgas', e.target.checked);
   if (e.target.checked) {
     metric.style.display = 'block';
     imperial.style.display = 'none';
@@ -38,8 +37,6 @@ unitSwitch.addEventListener('click', e => {
     imperialWeight.required = true;
   }
 });
-
-
 
 metric.addEventListener('onChange', e => {
   console.log(e.target.value);
@@ -67,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems, {});
 });
+
+// Prefill forms
 
 // render recipe
 const renderRecipe = (data, id) => {

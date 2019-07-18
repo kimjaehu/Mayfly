@@ -88,3 +88,20 @@ input {
   border-bottom: none;
   box-shadow: none;
 } */
+
+/* switch colour */
+.switch label input[type='checkbox'] + .lever {
+  background-color: #4db6ac;
+}
+
+.switch label input[type='checkbox'] + .lever:after {
+  background-color: #009688;
+}
+
+.switch label input[type='checkbox']:checked + .lever {
+  background-color: #ffb74d;
+}
+
+.switch label input[type='checkbox']:checked + .lever:after {
+  background-color: #ff9800;
+}

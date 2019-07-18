@@ -76,7 +76,7 @@
             
             <div class="row">
               <div class="col s12">
-                  <div id="unit-switch" class="switch">
+                  <div id="unit-switch" class="switch" name="unit-switch">
                     <label>
                       Imperial
                       <input type="checkbox">
@@ -90,15 +90,15 @@
             <div class="row">
               <div id="imperial" style="display:block">
                 <div class="input-field with-unit col s3 m3">
-                  <input id="imperial-height-ft" placeholder="ft" name="imperial-height-ft" type="number" min="50" max="250" class="validate" required=""/>
+                  <input id="imperial-height-ft" placeholder="ft" name="imperial-height-ft" type="number" min="1" max="10" class="validate" required=""/>
                   <label for="height">Height</label>  
                 </div>
                 <div class="input-field with-unit col s3 m3">
-                  <input id="imperial-height-in" placeholder="in" name="imperial-height-in" type="number" min="50" max="250" class="validate" required=""/>
+                  <input id="imperial-height-in" placeholder="in" name="imperial-height-in" type="number" min="0" max="11" class="validate" required=""/>
                 </div>
               
                 <div class="input-field with-unit col s6 m6">
-                  <input id="imperial-weight" placeholder="lbs" name="imperial-weight" type="number" min="0" max="300" class="validate" required=""/>
+                  <input id="imperial-weight" placeholder="lbs" name="imperial-weight" type="number" min="0" max="700" class="validate" required=""/>
                   <label for="weight">weight</label>
                 </div>
               </div>
@@ -111,7 +111,7 @@
                 </div>
               
                 <div class="input-field with-unit col s6 m6">
-                  <input id="metric-weight" placeholder="kgs" name="weight" type="number" min="0" max="300" class="validate"/>
+                  <input id="metric-weight" placeholder="kg" name="weight" type="number" min="0" max="300" class="validate"/>
                   <label for="weight">weight</label>
                 </div>
               </div>
@@ -176,7 +176,7 @@
           
 
             <div class="input-field center">
-              <button class="waves-effect waves-light btn-large">Edit</button>
+              <button class="waves-effect waves-light btn-large">Submit</button>
             </div>
         
         </form>
