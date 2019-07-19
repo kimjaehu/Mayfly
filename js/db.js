@@ -131,19 +131,112 @@ const renderAbout = data => {
     var elm = document.getElementById('date_of_birth');
     var instance = M.Datepicker.init(elm, {
       defaultDate: new Date(data.date_of_birth),
-      setDefaultDate: true
+      setDefaultDate: true,
+      autoClose: true
     });
   }
 
   if (data.height) {
-    console.log(data.height);
+    let feet = parseInt((data.height * 0.3937) / 12);
     document.getElementById('metric-height').value = parseInt(data.height);
-    document.getElementById('imperial-height-ft').value = parseInt(
-      data.height / 30.48
+    document.getElementById('imperial-height-ft').value = feet;
+    document.getElementById('imperial-height-in').value = Math.round(
+      ((data.height * 0.3937) / 12 - feet) * 12
     );
-    document.getElementById('imperial-height-in').value = parseInt(
-      (data.height % 30.48) * 12
+  }
+
+  if (data.weight) {
+    document.getElementById('metric-weight').value = parseInt(data.weight);
+    document.getElementById('imperial-weight').value = parseInt(
+      data.weight * 2.20462
     );
+  }
+
+  if (data.smoking) {
+    let smoking = document.querySelector('#smoking');
+    let smoking_options = smoking.querySelectorAll('option');
+    var elm = document.getElementById('smoking');
+
+    smoking_options.forEach(option => {
+      option.selected = false;
+
+      switch (option.value) {
+        case data.smoking:
+          option.selected = true;
+          break;
+      }
+    });
+    var instance = M.FormSelect.init(elm, { input: data.smoking });
+  }
+
+  if (data.alcohol) {
+    let alcohol = document.querySelector('#alcohol');
+    let alcohol_options = alcohol.querySelectorAll('option');
+    var elm = document.getElementById('alcohol');
+
+    alcohol_options.forEach(option => {
+      option.selected = false;
+
+      switch (option.value) {
+        case data.alcohol:
+          option.selected = true;
+          break;
+      }
+    });
+    var instance = M.FormSelect.init(elm, { input: data.alcohol });
+  }
+
+  if (data.physical_activity) {
+    let physical_activity = document.querySelector('#physical_activity');
+    let physical_activity_options = physical_activity.querySelectorAll(
+      'option'
+    );
+    var elm = document.getElementById('physical_activity');
+
+    physical_activity_options.forEach(option => {
+      option.selected = false;
+
+      switch (option.value) {
+        case data.physical_activity:
+          option.selected = true;
+          break;
+      }
+    });
+    var instance = M.FormSelect.init(elm, { input: data.physical_activity });
+  }
+
+  if (data.diet) {
+    let diet = document.querySelector('#diet');
+    let diet_options = diet.querySelectorAll('option');
+    var elm = document.getElementById('diet');
+
+    diet_options.forEach(option => {
+      option.selected = false;
+
+      switch (option.value) {
+        case data.diet:
+          option.selected = true;
+          break;
+      }
+    });
+    var instance = M.FormSelect.init(elm, { input: data.diet });
+  }
+
+  if (data.stress) {
+    let stress = document.querySelector('#stress');
+    let stress_options = stress.querySelectorAll('option');
+    var elm = document.getElementById('stress');
+
+    stress_options.forEach(option => {
+      option.selected = false;
+
+      switch (option.value) {
+        case data.stress:
+          option.selected = true;
+          break;
+      }
+    });
+    var instance = M.FormSelect.init(elm, { input: data.stress });
   }
 };
 
