@@ -48,22 +48,29 @@
   ui.start('#firebaseui-auth-container', uiConfig);
   auth.onAuthStateChanged(user => {
     // console.log(user.uid);
-  //   if (user) {
-  //     db.collection('users')
-  //       .doc(user.uid)
-  //       .onSnapshot(
-  //         snapshot => {
-  //           console.log(snapshot.data());
-  //           // renderDashboard(snapshot.data());
-  //           loginUI(user);
-  //         },
-  //         err => {
-  //           console.log(err.message);
-  //         }
-  //       );
-  //   } else {
-  //     loginUI();
-  //     // renderDashboard([]);
-  //   }
-  // });
+    if (user) {
+      db.collection('users')
+        .doc(user.uid)
+        .onSnapshot(
+          snapshot => {
+            console.log(snapshot.exists);
+            if (snapshot.exists) {
+              console.log('snapshot', snapshot.data());
+              // renderDashboard(snapshot.data());
+              renderAbout(snapshot.data());
+              loginUI(user);
+            } else {
+              console.log('new create');
+              createDoc(user.uid);
+            }
+          },
+          err => {
+            console.log(err.message);
+          }
+        );
+    } else {
+      loginUI();
+      // renderDashboard([]);
+    }
+  });
 })();

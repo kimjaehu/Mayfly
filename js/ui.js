@@ -4,8 +4,10 @@ const loginDiv = document.querySelector('.login');
 const loginUI = user => {
   if (user) {
     loginDiv.style.display = 'none';
+    about.style.display = 'block';
   } else {
     loginDiv.style.display = 'block';
+    about.style.display = 'none';
   }
 };
 

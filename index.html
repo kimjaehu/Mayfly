@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Jellyfish</title>
+    <title>Wisdomtooth</title>
 
     <!-- css icons js -->
     <link type="text/css" href="/css/materialize.min.css" rel="stylesheet" />
@@ -33,8 +33,7 @@
   <body class="white">
     <!-- Login info -->
     <div class="login container orange-text text-darken-3" style="display: none;">
-      <h1 class="title center">Jellyfish</h1>
-      <h4 class="center">Welcome</h4>
+      <h1 class="title center">Wisdomtooth</h1>
       <div>
         <div id="firebaseui-auth-container"></div>
         <div id="loader">Loading...</div>
@@ -42,7 +41,7 @@
     </div>
 
     <!-- About yourself -->
-    <div class="about container orange-text text-darken-3">
+    <div class="about container orange-text text-darken-3" style="display: none;">
       <!-- <div class="card-panel white"> -->
         <form class="add-about container section">
           <h6 class="title center">About you</h6>
@@ -51,28 +50,25 @@
               <div class="input-field">
                 <div class="col s6">
                   <label>
-                    <input name="gender" type="radio" value="Male"  checked/>
+                    <input id="male" name="gender" type="radio" value="Male"  checked/>
                     <span>Male</span>
                   </label>
                 </div>
                 <div class="col s6">
                   <label>
-                    <input name="gender" type="radio" value="Female" />
+                    <input id="female" name="gender" type="radio" value="Female" />
                     <span>Female</span>
                   </label>
                 </div>
               </div>
             </div>
-          
-
+ 
             <div class="row">
               <div class="input-field col s12">
                 <input id="date_of_birth" type="text" class="datepicker" name="date_of_birth" required=""/>
                 <label for="date_of_birth">Date of birth</label>
               </div>
             </div>
-            
-
             
             <div class="row">
               <div class="col s12">
@@ -102,8 +98,7 @@
                   <label for="weight">weight</label>
                 </div>
               </div>
-            
-
+          
               <div id="metric" style="display:none">
                 <div class="input-field with-unit col s6 m6">
                   <input id="metric-height" placeholder="cm" name="height" type="number" min="50" max="250" class="validate"/>
@@ -128,7 +123,6 @@
               <label>Do you smoke?</label>
             </div>
 
-            
             <div class="input-field">
                 <select id="alcohol" name="alcohol">
                 <!-- <option value="" disabled selected -->
@@ -174,14 +168,15 @@
               <label>How stressed are you?</label>
             </div>
           
-
             <div class="input-field center">
               <button class="waves-effect waves-light btn-large">Submit</button>
             </div>
-        
         </form>
       <!-- </div> -->
     </div>
+
+
+
 
     <script src="/js/firebase.js"></script>
     <script>
