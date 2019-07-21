@@ -1,13 +1,13 @@
-const about = document.querySelector('.about');
+const dashboard = document.querySelector('.dashboard');
 const loginDiv = document.querySelector('.login');
 
 const loginUI = user => {
   if (user) {
     loginDiv.style.display = 'none';
-    about.style.display = 'block';
+    dashboard.style.display = 'block';
   } else {
     loginDiv.style.display = 'block';
-    about.style.display = 'none';
+    dashboard.style.display = 'none';
   }
 };
 
@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems, {});
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elem = document.querySelectorAll('.tabs');
+  var instance = M.Tabs.init(elem, { swipeable: true });
 });
 
 // Prefill forms

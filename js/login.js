@@ -49,6 +49,8 @@
   auth.onAuthStateChanged(user => {
     // console.log(user.uid);
     if (user) {
+      uid = user.uid;
+
       db.collection('users')
         .doc(user.uid)
         .onSnapshot(
@@ -70,7 +72,11 @@
         );
     } else {
       loginUI();
-      // renderDashboard([]);
+
+      renderDashboard([]);
+
+      // uid = null;
+      // window.location.replace('/pages/login.html');
     }
   });
 })();

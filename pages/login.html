@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Jellyfish</title>
+    <title>Wisdomtooth Login</title>
 
     <!-- css icons js -->
     <link type="text/css" href="/css/materialize.min.css" rel="stylesheet" />
@@ -29,15 +29,30 @@
       href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
     />
   </head>
-  <body class="grey lighten-4">
-    <h1 class="center">Jellyfish</h1>
-    <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
+
+  <body class="white">
+    <!-- Login info -->
+    <div
+      class="login container orange-text text-darken-3"
+      style="display: none;"
+    >
+      <h1 class="title center">Wisdomtooth</h1>
+      <div>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+      </div>
+    </div>
 
     <script src="/js/firebase.js"></script>
+    <script>
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
+
     <script src="/js/app.js"></script>
     <script src="/js/login.js"></script>
     <script src="/js/db.js"></script>
     <script src="/js/ui.js"></script>
+    <script src="/js/auth.js"></script>
   </body>
 </html>
