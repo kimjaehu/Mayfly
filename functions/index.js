@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
-// const admin = require('firebase-admin')
-// admin.initializeApp()
+const admin = require('firebase-admin');
+admin.initializeApp();
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -11,18 +11,25 @@ const functions = require('firebase-functions');
 
 // exports.addUserData = functions.https.onCall
 
-exports.lifeExpectancy = functions.database
-  .ref('/users/{uid}')
+exports.lifeExpectancy = functions.firestore
+  .document('/users/{userId}')
   .onCreate((snapshot, context) => {
-    const uid = context.auth.uid;
+    const uid = context.params.userId;
 
-    console.log(`new entry ${uid}`);
-    console.log(snapshot.val());
+    console.log(snapshot.data());
+    const data = snapshot.data();
+    // const aboutData = snapshot.data();
+    // const estimate = lifeCalculation(aboutData);
 
-    const aboutData = snapshot.val();
-    const estimate = lifeCalculation(aboutData);
+    const lifeExpVal = lifeCalculation(data);
 
-    const ref = snapshot.ref.set({ life_extectancy: lifeExpectancy });
+    db.collection('users')
+      .doc(uid)
+      .update({ life_expectancy: lifeExpVal })
+      .catch(err => console.log(err));
   });
 
-const lifeCalculation = () => {};
+const lifeCalculation = data => {
+  console.log(data);
+  return 8;
+};
