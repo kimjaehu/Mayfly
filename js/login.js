@@ -49,34 +49,29 @@
   auth.onAuthStateChanged(user => {
     // console.log(user.uid);
     if (user) {
-      uid = user.uid;
-
-      db.collection('users')
-        .doc(user.uid)
-        .onSnapshot(
-          snapshot => {
-            console.log(snapshot.exists);
-            if (snapshot.exists) {
-              console.log('snapshot', snapshot.data());
-              // renderDashboard(snapshot.data());
-              renderAbout(snapshot.data());
-              loginUI(user);
-            } else {
-              console.log('new create');
-              createDoc(user.uid);
+      let uid = user.uid;
+      loginUI(uid);
+        db.collection('users')
+          .doc(user.uid)
+          .onSnapshot(
+            snapshot => {
+              console.log(snapshot.exists);
+              if (snapshot.exists) {
+                console.log('snapshot', snapshot.data());
+                // renderDashboard(snapshot.data());
+                renderAbout(snapshot.data());
+                loginUI(user);
+              } else {
+                renderAbout(snapshot.data());
+                console.log('new create');
+              }
+            },
+            err => {
+              console.log(err.message);
             }
-          },
-          err => {
-            console.log(err.message);
-          }
-        );
+          );
     } else {
       loginUI();
-
-      renderDashboard([]);
-
-      // uid = null;
-      // window.location.replace('/pages/login.html');
     }
   });
 })();

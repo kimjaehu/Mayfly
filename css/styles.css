@@ -105,3 +105,6 @@ input {
 .switch label input[type='checkbox']:checked + .lever:after {
   background-color: #ff9800;
 }
+.tabs-content.carousel .carousel-item {
+  height: auto;
+}

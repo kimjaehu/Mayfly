@@ -98,24 +98,24 @@ const lbToKgConversion = lb => {
 };
 
 // create document
-const createDoc = uid => {
-  const about = {
-    gender: '',
-    date_of_birth: '',
-    height: '',
-    weight: '',
-    smoking: '',
-    alcohol: '',
-    physical_activity: '',
-    diet: '',
-    stress: ''
-  };
+// const createDoc = uid => {
+//   const about = {
+//     gender: '',
+//     date_of_birth: '',
+//     height: '',
+//     weight: '',
+//     smoking: '',
+//     alcohol: '',
+//     physical_activity: '',
+//     diet: '',
+//     stress: ''
+//   };
 
-  db.collection('users')
-    .doc(uid)
-    .set(about)
-    .catch(err => console.log(err));
-};
+//   db.collection('users')
+//     .doc(uid)
+//     .set(about)
+//     .catch(err => console.log(err));
+// };
 
 // render about
 const renderAbout = data => {

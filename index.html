@@ -182,12 +182,144 @@
       <div class="row">
           <div class="col s12">
             <ul id="tabs-swipe-demo" class="tabs">
-                <li class="tab col s4"><a href="#test-swipe-1" class="active">Life</a></li>
-                <li class="tab col s4"><a href="#test-swipe-2">Wisdom</a></li>
-                <li class="tab col s4"><a href="#test-swipe-3">Test 3</a></li>
+                <li class="tab col s4"><a href="#test-swipe-1" class="active"></a></li>
+                <li class="tab col s4"><a href="#test-swipe-2"></a></li>
+                <li class="tab col s4"><a href="#test-swipe-3"></a></li>
             </ul>
           </div>
-          <div id="test-swipe-1" class="col s12 blue">Test 1</div>
+          <div id="test-swipe-1" class="about container orange-text text-darken-3">
+              <!-- <div class="card-panel white"> -->
+                <form class="add-about container section">
+                  <h6 class="title center">About you</h6>
+                  <div class="divider"></div>
+                    <div class="row">
+                      <div class="input-field">
+                        <div class="col s6">
+                          <label>
+                            <input id="male" name="gender" type="radio" value="Male"  checked/>
+                            <span>Male</span>
+                          </label>
+                        </div>
+                        <div class="col s6">
+                          <label>
+                            <input id="female" name="gender" type="radio" value="Female" />
+                            <span>Female</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+         
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="date_of_birth" type="text" class="datepicker" name="date_of_birth" required=""/>
+                        <label for="date_of_birth">Date of birth</label>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col s12">
+                          <div id="unit-switch" class="switch" name="unit-switch">
+                            <label>
+                              Imperial
+                              <input type="checkbox">
+                              <span class="lever"></span>
+                              Metric
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+        
+                    <div class="row">
+                      <div id="imperial" style="display:block">
+                        <div class="input-field with-unit col s3 m3">
+                          <input id="imperial-height-ft" placeholder="ft" name="imperial-height-ft" type="number" min="1" max="10" class="validate" required=""/>
+                          <label for="height">Height</label>  
+                        </div>
+                        <div class="input-field with-unit col s3 m3">
+                          <input id="imperial-height-in" placeholder="in" name="imperial-height-in" type="number" min="0" max="11" class="validate" required=""/>
+                        </div>
+                      
+                        <div class="input-field with-unit col s6 m6">
+                          <input id="imperial-weight" placeholder="lbs" name="imperial-weight" type="number" min="0" max="700" class="validate" required=""/>
+                          <label for="weight">weight</label>
+                        </div>
+                      </div>
+                  
+                      <div id="metric" style="display:none">
+                        <div class="input-field with-unit col s6 m6">
+                          <input id="metric-height" placeholder="cm" name="height" type="number" min="50" max="250" class="validate"/>
+                          <label for="height">Height</label>  
+                        </div>
+                      
+                        <div class="input-field with-unit col s6 m6">
+                          <input id="metric-weight" placeholder="kg" name="weight" type="number" min="0" max="300" class="validate"/>
+                          <label for="weight">weight</label>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="input-field">
+                      <select type="select" id="smoking" name="smoking">
+                        <!-- <option value="" disabled selected>Do you smoke?</option> -->
+                        <option value="heavy">Heavy (&#8805; 1 pack/day)</option>
+                        <option value="light">Light (&#60; 1 pack/day)</option>
+                        <option value="former">Former smoker</option>
+                        <option value="never" selected>Never smoked</option>
+                      </select>
+                      <label>Do you smoke?</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <select id="alcohol" name="alcohol">
+                        <!-- <option value="" disabled selected -->
+                          >How often do you drink?</option
+                        >
+                        <option value="binge">Binge (&#8805; 17 drinks/wk)</option>
+                        <option value="heavy">Heavy (6 to 17 drinks/wk)</option>
+                        <option value="moderate">Moderate (3 to 5 drinks/wk)</option>
+                        <option value="light">Light (0 to 2 drinks/wk)</option>
+                        <option value="occasional">Occasional (&#60; 1 drink/mo)</option>
+                        <option value="no_alcohol" selected>No alcohol in last 12 years</option>
+                      </select>
+                      <label>How often do you drink?</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <select id="physical_activity" name="physical_activity">
+                        <!-- <option value="" disabled selected>How active are you?</option> -->
+                        <option value="inactive">Inactive</option>
+                        <option value="moderate">Moderately active</option>
+                        <option value="active" selected>Active</option>
+                      </select>
+                      <label>How active are you?</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <select id="diet" name="diet">
+                        <!-- <option value="" disabled selected>How is your diet?</option> -->
+                        <option value="very_poor">Very poor diet</option>
+                        <option value="poor">Poor diet</option>
+                        <option value="fair">Fair diet</option>
+                        <option value="adequate" selected>Adequate diet</option>
+                      </select>
+                      <label>How is your diet?</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <select id="stress" name="stress">
+                        <!-- <option value="" disabled selected>How stressed are you?</option> -->
+                        <option value="high">High stress</option>
+                        <option value="low" selected>Low stress</option>
+                      </select>
+                      <label>How stressed are you?</label>
+                    </div>
+                  
+                    <div class="input-field center">
+                      <button class="waves-effect waves-light btn-large">Submit</button>
+                    </div>
+                </form>
+              <!-- </div> -->
+            </div>
           <div id="test-swipe-2" class="col s12 red">Test 2</div>
           <div id="test-swipe-3" class="col s12 green">Test 3</div>
       </div>
