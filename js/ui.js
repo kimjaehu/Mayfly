@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var instance = M.Tabs.init(elem, { swipeable: true });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.collapsible');
+  var instances = M.Collapsible.init(elems, {});
+});
+
+
 // Prefill forms
 
 // render recipe

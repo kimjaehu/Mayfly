@@ -106,5 +106,9 @@ input {
   background-color: #ff9800;
 }
 .tabs-content.carousel .carousel-item {
-  height: auto;
+  height: 100%;
+}
+
+.add-about .section {
+  height: 100%;
 }
