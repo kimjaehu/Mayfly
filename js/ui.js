@@ -3,15 +3,15 @@ const aboutDiv = document.querySelector('.about');
 const loginDiv = document.querySelector('.login');
 
 const loginUI = user => {
-  // if (user) {
-  //   loginDiv.style.display = 'none';
-  //   aboutDiv.style.display = 'block';
-  //   dashboard.style.display = 'none';
-  // } else {
-  //   loginDiv.style.display = 'block';
-  //   aboutDiv.style.display = 'none';
-  //   dashboard.style.display = 'none';
-  // }
+  if (user) {
+    loginDiv.style.display = 'none';
+    // aboutDiv.style.display = 'block';
+    dashboard.style.display = 'none';
+  } else {
+    loginDiv.style.display = 'block';
+    // aboutDiv.style.display = 'none';
+    dashboard.style.display = 'none';
+  }
 };
 
 const aboutUI = user => {};
@@ -81,9 +81,22 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, {});
 });
+const createAbout = () => {
+  console.log('create about');
+  var elem = document.getElementById('modal1');
+  var instance = M.Modal.init(elem, { dismissible: false });
+  console.log('modal open');
+  instance.open();
+};
+// const createAbout = () => {
+//   instance.open();
+// };
 
-
-// Prefill forms
+const closeModal = () => {
+  var elem = document.getElementById('modal1');
+  var instance = M.Modal.init(elem, { dismissible: false });
+  instance.close();
+};
 
 // render recipe
 const renderRecipe = (data, id) => {

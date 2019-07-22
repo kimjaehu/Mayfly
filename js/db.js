@@ -27,7 +27,7 @@ db.enablePersistence().catch(err => {
 //     });
 //   });
 
-// add new recipe
+// add new about
 const form = document.querySelector('form');
 
 form.addEventListener('submit', e => {
@@ -72,7 +72,10 @@ form.addEventListener('submit', e => {
 
   db.collection('users')
     .doc(firebase.auth().currentUser.uid)
-    .update(about)
+    .set(about)
+    .then(() => {
+      closeModal();
+    })
     .catch(err => console.log(err));
 });
 
@@ -117,7 +120,7 @@ const lbToKgConversion = lb => {
 //     .catch(err => console.log(err));
 // };
 
-// render about
+// pre-fill about
 const renderAbout = data => {
   if (data.gender === 'Male') {
     document.getElementById('male').checked = true;

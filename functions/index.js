@@ -10,3 +10,19 @@ const functions = require('firebase-functions');
 // });
 
 // exports.addUserData = functions.https.onCall
+
+exports.lifeExpectancy = functions.database
+  .ref('/users/{uid}')
+  .onCreate((snapshot, context) => {
+    const uid = context.auth.uid;
+
+    console.log(`new entry ${uid}`);
+    console.log(snapshot.val());
+
+    const aboutData = snapshot.val();
+    const estimate = lifeCalculation(aboutData);
+
+    const ref = snapshot.ref.set({ life_extectancy: lifeExpectancy });
+  });
+
+const lifeCalculation = () => {};
