@@ -22,14 +22,17 @@ exports.lifeExpectancy = functions.firestore
     // const estimate = lifeCalculation(aboutData);
 
     const lifeExpVal = lifeCalculation(data);
+    const bmi = bmiCalculation(data);
 
-    db.collection('users')
-      .doc(uid)
-      .update({ life_expectancy: lifeExpVal })
-      .catch(err => console.log(err));
+    return snapshot.ref.update({
+      bmi: bmi,
+      life_expectancy: lifeExpVal
+    });
   });
 
 const lifeCalculation = data => {
   console.log(data);
   return 8;
 };
+
+const bmiCalculation = data => {};

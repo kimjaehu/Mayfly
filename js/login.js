@@ -53,23 +53,22 @@
       loginUI(uid);
       db.collection('users')
         .doc(user.uid)
-        .onSnapshot(
-          snapshot => {
-            console.log(snapshot.exists);
-            if (snapshot.exists) {
-              console.log('snapshot', snapshot.data());
-              // renderDashboard(snapshot.data());
-              renderAbout(snapshot.data());
-              loginUI(user);
-            } else {
-              console.log('new create');
-              createAbout();
-            }
-          },
-          err => {
-            console.log(err.message);
+        .get()
+        .then(doc => {
+          console.log(doc.exists);
+          if (doc.exists) {
+            console.log('doc', doc.data());
+            // renderDashboard(doc.data());
+            renderAbout(doc.data());
+            loginUI(user);
+          } else {
+            console.log('new create');
+            createAbout();
           }
-        );
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
     } else {
       loginUI();
     }

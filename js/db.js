@@ -27,6 +27,32 @@ db.enablePersistence().catch(err => {
 //     });
 //   });
 
+// get country code
+$.ajax({
+  url: 'https://geoip-db.com/jsonp',
+  jsonpCallback: 'callback',
+  dataType: 'jsonp',
+  success: location => {
+    console.log(location);
+    country_code = location.country_code;
+    country_name = location.country_name;
+    state = location.state;
+    city = location.city;
+    lat = location.latitude;
+    lon = location.longitude;
+    ipv4 = location.IPv4;
+  },
+  error: () => {
+    country_code = 'ZZ';
+    country_name = 'No country';
+    state = 'No state';
+    city = 'No city';
+    lat = 0;
+    lon = 0;
+    ipv4 = '0.0.0.0';
+  }
+});
+
 // add new about
 const form = document.querySelector('form');
 
@@ -34,6 +60,9 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   let metric = document.getElementById('metric').style.display;
   let about = {};
+
+  console.log('country code', country_code);
+
   if (metric === 'block') {
     about = {
       gender: form.gender.value,
@@ -44,7 +73,12 @@ form.addEventListener('submit', e => {
       alcohol: form.alcohol.value,
       physical_activity: form.physical_activity.value,
       diet: form.diet.value,
-      stress: form.stress.value
+      stress: form.stress.value,
+      country_code: country_code,
+      state: state,
+      city: city,
+      lat: lat,
+      lon: lon
     };
     console.log('metric');
   } else {
@@ -66,10 +100,16 @@ form.addEventListener('submit', e => {
       alcohol: form.alcohol.value,
       physical_activity: form.physical_activity.value,
       diet: form.diet.value,
-      stress: form.stress.value
+      stress: form.stress.value,
+      country_code: country_code,
+      state: state,
+      city: city,
+      lat: lat,
+      lon: lon
     };
   }
 
+  console.log(about);
   db.collection('users')
     .doc(firebase.auth().currentUser.uid)
     .set(about)

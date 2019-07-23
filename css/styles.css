@@ -105,10 +105,14 @@ input {
 .switch label input[type='checkbox']:checked + .lever:after {
   background-color: #ff9800;
 }
-.tabs-content.carousel .carousel-item {
+/* .tabs-content.carousel .carousel-item {
   height: 100%;
 }
 
 .add-about .section {
   height: 100%;
+} */
+
+.hidden {
+  display: none;
 }

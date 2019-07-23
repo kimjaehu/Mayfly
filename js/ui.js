@@ -5,12 +5,16 @@ const loginDiv = document.querySelector('.login');
 const loginUI = user => {
   if (user) {
     loginDiv.style.display = 'none';
+    // loginDiv.style.hidden = true;
     // aboutDiv.style.display = 'block';
-    dashboard.style.display = 'none';
+    dashboard.style.display = 'block';
+    // dashboard.style.hidden = false;
   } else {
     loginDiv.style.display = 'block';
+    // loginDiv.style.hidden = false;
     // aboutDiv.style.display = 'none';
     dashboard.style.display = 'none';
+    // dashboard.style.hidden = true;
   }
 };
 
@@ -81,6 +85,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, {});
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elem = document.getElementById('swipeable-tab');
+  var instance = M.Tabs.init(elem, { swipeable: true });
+});
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   var elem = document.getElementById('country');
+//   var instance = M.Autocomplete.init(elem, { data });
+// });
+
 const createAbout = () => {
   console.log('create about');
   var elem = document.getElementById('modal1');
