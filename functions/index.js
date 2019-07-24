@@ -11,25 +11,56 @@ const db = admin.firestore();
 
 // exports.addUserData = functions.https.onCall
 
+// exports.lifeExpectancy = functions.firestore
+//   .document('/users/{userId}')
+//   .onCreate((snapshot, context) => {
+//     const data = snapshot.data();
+//     // const aboutData = snapshot.data();
+//     // const estimate = lifeCalculation(aboutData);
+
+//     const lifeExpVal = lifeCalculation(data);
+//     const bmi = bmiCalculation(data);
+
+//     return {
+//       bmi: bmi,
+//       life_expectancy: lifeExpVal
+//     }.then(data => {
+//       console.log(data);
+//       return snapshot.ref.update(data);
+//     });
+//   });
+
 exports.lifeExpectancy = functions.firestore
   .document('/users/{userId}')
-  .onCreate((snapshot, context) => {
-    const uid = context.params.userId;
+  .onCreate(async (snapshot, context) => {
     const data = snapshot.data();
     // const aboutData = snapshot.data();
     // const estimate = lifeCalculation(aboutData);
 
-    const lifeExpVal = lifeCalculation(data);
-    const bmi = bmiCalculation(data);
+    const lifeExpVal = await promiseLife(data);
+    const bmi = await promiseBmi(data);
+    console.log('lifeExpVal and bmi', lifeExpVal, bmi);
 
-    return snapshot.ref.update({
+    return {
       bmi: bmi,
       life_expectancy: lifeExpVal
+    }.then(data => {
+      console.log(data);
+      return snapshot.ref.update(data);
     });
   });
 
+const promiseLife = new Promise(resolve => {
+  return resolve(lifeCalculation(data));
+});
+
+const promiseBmi = new Promise(resolve => {
+  return resolve(bmiCalculation(data));
+});
+
 const lifeCalculation = data => {
-  const lifeVal = db
+  console.log(data);
+  data.life_expectancy = db
     .collection('assets')
     .doc(data.country_name)
     .get()
@@ -37,10 +68,11 @@ const lifeCalculation = data => {
       return doc.data().life_expectancy_f.value;
     })
     .catch(err => console.log(err));
-  return parseFloat(lifeVal);
+  return data;
 };
 
 const bmiCalculation = data => {
-  let bmiVal = data.weight / Math.pow(data.height / 100, 2);
-  return bmiVal.toFixed(1);
+  data.bmi = (data.weight / Math.pow(data.height / 100, 2)).toFixed(1);
+  console.log(data);
+  return data;
 };
