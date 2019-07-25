@@ -41,38 +41,41 @@ exports.lifeExpectancy = functions.firestore
     const bmi = await promiseBmi(data);
     console.log('lifeExpVal and bmi', lifeExpVal, bmi);
 
-    return {
-      bmi: bmi,
-      life_expectancy: lifeExpVal
-    }.then(data => {
-      console.log(data);
-      return snapshot.ref.update(data);
-    });
+    return await snapshot.ref.update(data);
+
+    // return {
+    //   bmi: bmi,
+    //   life_expectancy: lifeExpVal
+    // }.then(data => {
+    //   return snapshot.ref.update(data);
+    // });
   });
 
-const promiseLife = new Promise(resolve => {
-  return resolve(lifeCalculation(data));
-});
+const promiseLife = data => {
+  return new Promise(resolve => {
+    return lifeCalculation(data);
+  });
+};
 
-const promiseBmi = new Promise(resolve => {
-  return resolve(bmiCalculation(data));
-});
+const promiseBmi = data => {
+  return new Promise(resolve => {
+    return bmiCalculation(data);
+  });
+};
 
-const lifeCalculation = data => {
-  console.log(data);
-  data.life_expectancy = db
+const lifeCalculation = async data => {
+  return (data.life_expectancy = await db
     .collection('assets')
     .doc(data.country_name)
     .get()
     .then(doc => {
+      console.log('lifecalculation', data);
       return doc.data().life_expectancy_f.value;
     })
-    .catch(err => console.log(err));
-  return data;
+    .catch(err => console.log(err)));
 };
 
 const bmiCalculation = data => {
-  data.bmi = (data.weight / Math.pow(data.height / 100, 2)).toFixed(1);
-  console.log(data);
-  return data;
+  console.log('bmicalculation', data);
+  return (data.bmi = (data.weight / Math.pow(data.height / 100, 2)).toFixed(1));
 };
