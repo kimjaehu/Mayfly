@@ -62,7 +62,19 @@ const renderDashboard = data => {
   // about.innerHTML = html;
 };
 
-const doNotRenderDashboard = () => {};
+const createAbout = () => {
+  console.log('create about');
+  var elem = document.getElementById('modal1');
+  var instance = M.Modal.init(elem, { dismissible: false });
+  console.log('modal open');
+  instance.open();
+};
+
+const closeModal = () => {
+  var elem = document.getElementById('modal1');
+  var instance = M.Modal.init(elem, { dismissible: false });
+  instance.close();
+};
 
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.datepicker');
@@ -95,23 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
 //   var elem = document.getElementById('country');
 //   var instance = M.Autocomplete.init(elem, { data });
 // });
-
-const createAbout = () => {
-  console.log('create about');
-  var elem = document.getElementById('modal1');
-  var instance = M.Modal.init(elem, { dismissible: false });
-  console.log('modal open');
-  instance.open();
-};
-// const createAbout = () => {
-//   instance.open();
-// };
-
-const closeModal = () => {
-  var elem = document.getElementById('modal1');
-  var instance = M.Modal.init(elem, { dismissible: false });
-  instance.close();
-};
 
 // render recipe
 const renderRecipe = (data, id) => {

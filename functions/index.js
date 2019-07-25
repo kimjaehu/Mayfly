@@ -67,13 +67,21 @@ const promiseBmi = data => {
 const lifeCalculation = data => {
   return new Promise(resolve => {
     console.log('data:', data);
+    let gender = '';
+    if (data.gender === 'Male') {
+      gender = 'life_expectancy_m';
+    } else if (data.gender === 'Female') {
+      gender = 'life_expectancy_f';
+    } else {
+      gender = 'life_expectancy_b';
+    }
     const life = db
       .collection('assets')
       .doc(data.country_name)
       .get()
       .then(doc => {
-        console.log(doc.data().life_expectancy_f);
-        return Number(doc.data().life_expectancy_f);
+        console.log(doc.data().gender);
+        return Number(doc.data().gender);
       })
       .catch(err => console.log(err));
     resolve(life);
