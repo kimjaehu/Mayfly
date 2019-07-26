@@ -54,6 +54,10 @@ metric.addEventListener('onChange', e => {
 });
 
 const renderDashboard = data => {
+  //Dashboard needs:
+  //L left
+  //BMI
+  //INFO
   // // const aboutYourself = data[0].data();
   // console.log(data);
   // let html = `
