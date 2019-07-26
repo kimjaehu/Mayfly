@@ -79,7 +79,10 @@ const closeModal = () => {
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.datepicker');
   var instances = M.Datepicker.init(elems, {
-    autoClose: true
+    autoClose: true,
+    disableDayFn: day => {
+      return day.valueOf() > new Date().valueOf();
+    }
   });
 });
 

@@ -80,8 +80,8 @@ const lifeCalculation = data => {
       .doc(data.country_name)
       .get()
       .then(doc => {
-        console.log(doc.data().gender);
-        return Number(doc.data().gender);
+        console.log(doc.data()[gender]);
+        return Number(doc.data()[gender]);
       })
       .catch(err => console.log(err));
     resolve(life);
