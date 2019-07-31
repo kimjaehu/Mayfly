@@ -67,6 +67,91 @@ const promiseBmi = data => {
 const lifeCalculation = data => {
   return new Promise(resolve => {
     console.log('data:', data);
+    let variance = 0;
+    let smokingVar = 0;
+    let alcoholVar = 0;
+    let physicalVar = 0;
+    let dietVar = 0;
+    let stressVar = 0;
+    // Smoking
+    switch (data.smoking) {
+      case 'heavy':
+        smokingVar = -8.8;
+        break;
+      case 'light':
+        smokingVar = -4.4;
+        break;
+      case 'fomer':
+        smokingVar = 0;
+        break;
+      case 'never':
+        smokingVar = 2.7;
+        break;
+    }
+
+    //Alcohol consumption
+    switch (data.alcohol) {
+      case 'binge':
+        alcoholVar = -1.7;
+        break;
+      case 'heavy':
+        alcoholVar = -1.2;
+        break;
+      case 'moderate':
+        alcoholVar = -0.6;
+        break;
+      case 'light':
+        alcoholVar = 0;
+        break;
+      case 'occasional':
+        alcoholVar = 1.5;
+        break;
+      case 'no_alcohol':
+        alcoholVar = 3.1;
+        break;
+    }
+
+    // Physical activity
+    switch (data.physical_activity) {
+      case 'inactive':
+        physicalVar = -1.5;
+        break;
+      case 'moderate':
+        physicalVar = 0;
+        break;
+      case 'active':
+        physicalVar = 3.1;
+        break;
+    }
+
+    // Diet
+    switch (data.diet) {
+      case 'very_poor':
+        dietVar = -4.0;
+        break;
+      case 'poor':
+        dietVar = -2.0;
+        break;
+      case 'fair':
+        dietVar = 0;
+        break;
+      case 'adequate':
+        dietVar = 3.2;
+        break;
+    }
+
+    // Stress
+    switch (data.stress) {
+      case 'high':
+        stressVar = -2.1;
+        break;
+      case 'low':
+        stressVar = 0.4;
+        break;
+    }
+    console.log(smokingVar, alcoholVar, physicalVar, dietVar, stressVar);
+    variance = smokingVar + alcoholVar + physicalVar + dietVar + stressVar;
+
     let gender = '';
     if (data.gender === 'Male') {
       gender = 'life_expectancy_m';
@@ -75,13 +160,13 @@ const lifeCalculation = data => {
     } else {
       gender = 'life_expectancy_b';
     }
+
     const life = db
       .collection('assets')
       .doc(data.country_name)
       .get()
       .then(doc => {
-        console.log(doc.data()[gender]);
-        return Number(doc.data()[gender]);
+        return Number(doc.data()[gender]) + variance;
       })
       .catch(err => console.log(err));
     resolve(life);
