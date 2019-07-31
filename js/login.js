@@ -60,6 +60,7 @@
             console.log('doc', doc.data());
             // renderDashboard(doc.data());
             renderAbout(doc.data());
+            renderDashboard(doc.data());
             loginUI(user);
           } else {
             console.log('new create');

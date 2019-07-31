@@ -67,12 +67,24 @@ const promiseBmi = data => {
 const lifeCalculation = data => {
   return new Promise(resolve => {
     console.log('data:', data);
+    let bmiValue = Number(
+      (data.weight / Math.pow(data.height / 100, 2)).toFixed(1)
+    );
     let variance = 0;
     let smokingVar = 0;
     let alcoholVar = 0;
     let physicalVar = 0;
     let dietVar = 0;
     let stressVar = 0;
+    let bmiVar = 0;
+
+    //bmi
+    if (bmiValue >= 18.5 || bmiValue < 25) {
+      bmiVar = 0;
+    } else {
+      bmiVar = 1;
+    }
+
     // Smoking
     switch (data.smoking) {
       case 'heavy':
@@ -150,7 +162,8 @@ const lifeCalculation = data => {
         break;
     }
     console.log(smokingVar, alcoholVar, physicalVar, dietVar, stressVar);
-    variance = smokingVar + alcoholVar + physicalVar + dietVar + stressVar;
+    variance =
+      smokingVar + alcoholVar + physicalVar + dietVar + stressVar + bmiVar;
 
     let gender = '';
     if (data.gender === 'Male') {
@@ -163,7 +176,7 @@ const lifeCalculation = data => {
 
     const life = db
       .collection('assets')
-      .doc(data.country_name)
+      .doc(data.country_code)
       .get()
       .then(doc => {
         return Number(doc.data()[gender]) + variance;
