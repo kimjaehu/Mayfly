@@ -1,6 +1,7 @@
 const dashboard = document.querySelector('.dashboard');
 const aboutDiv = document.querySelector('.about');
 const loginDiv = document.querySelector('.login');
+var Chart = require('chart.js');
 
 const loginUI = user => {
   if (user) {
