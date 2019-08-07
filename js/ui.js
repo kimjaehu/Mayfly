@@ -64,7 +64,23 @@ const showDaysLived = time => {
   daysLived.innerHTML = `${livedYears}yr ${livedMonths}mo ${livedWeeks}wk ${livedDays}day`;
 };
 
-const showDaysWillLive = time => {};
+const showDaysWillLive = (time, birthday) => {
+  let today = moment();
+  let expectedDays = moment.duration(time, 'years').asDays();
+  let expected = moment(birthday).add(expectedDays, 'days');
+  let livedYears = expected.diff(today, 'years');
+  today.add(livedYears, 'years');
+  let livedMonths = expected.diff(today, 'months');
+  today.add(livedMonths, 'months');
+  let livedWeeks = expected.diff(today, 'weeks');
+  today.add(livedWeeks, 'weeks');
+  let livedDays = expected.diff(today, 'days');
+  today.add(livedDays, 'days');
+  let daysWillLive = document.getElementById('days-will-live');
+  daysWillLive.innerHTML = `${livedYears}yr ${livedMonths}mo ${livedWeeks}wk ${livedDays}day`;
+};
+
+
 
 const renderDashboard = data => {
   console.log('renderdashboard', data);
@@ -78,13 +94,15 @@ const renderDashboard = data => {
           label: 'Life expectancy',
           data: [25, data.life_expectancy - 25],
           backgroundColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
+            '#ff9800',
+            '#fff',
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
-          ]
+          ],
+          borderColor: ['#ff9800', '#ff9800', '#ff9800', '#ff9800', '#ff9800'],
+          borderWidth: 2
         }
       ]
     },
@@ -144,7 +162,7 @@ const renderDashboard = data => {
   });
 
   showDaysLived(data.date_of_birth);
-  showDaysWillLive(data.life_expectancy);
+  showDaysWillLive(data.life_expectancy, data.date_of_birth);
 };
 const createAbout = () => {
   console.log('create about');
