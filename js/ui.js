@@ -49,6 +49,23 @@ unitSwitch.addEventListener('click', e => {
   }
 });
 
+const showDaysLived = time => {
+  let birthday = moment(time);
+  let today = moment();
+  let livedYears = today.diff(birthday, 'years');
+  birthday.add(livedYears, 'years');
+  let livedMonths = today.diff(birthday, 'months');
+  birthday.add(livedMonths, 'months');
+  let livedWeeks = today.diff(birthday, 'weeks');
+  birthday.add(livedWeeks, 'weeks');
+  let livedDays = today.diff(birthday, 'days');
+  birthday.add(livedDays, 'days');
+  let daysLived = document.getElementById('days-lived');
+  daysLived.innerHTML = `${livedYears}yr ${livedMonths}mo ${livedWeeks}wk ${livedDays}day`;
+};
+
+const showDaysWillLive = time => {};
+
 const renderDashboard = data => {
   console.log('renderdashboard', data);
   var ctx = document.getElementById('myChart').getContext('2d');
@@ -86,6 +103,7 @@ const renderDashboard = data => {
         animateScale: true,
         animateRotate: true
       },
+
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -106,8 +124,28 @@ const renderDashboard = data => {
       }
     }
   });
-};
 
+  //Plugin for center text
+  Chart.pluginService.register({
+    beforeDraw: function(chart) {
+      var width = chart.chart.width,
+        height = chart.chart.height,
+        ctx = chart.chart.ctx;
+      ctx.restore();
+      var fontSize = (height / 70).toFixed(2);
+      ctx.font = fontSize + 'em Courier';
+      ctx.textBaseline = 'top';
+      var text = Math.floor((25 / data.life_expectancy) * 100 + 0.5) + '%',
+        textX = Math.round((width - ctx.measureText(text).width) / 2),
+        textY = height / 1.4;
+      ctx.fillText(text, textX, textY);
+      ctx.save();
+    }
+  });
+
+  showDaysLived(data.date_of_birth);
+  showDaysWillLive(data.life_expectancy);
+};
 const createAbout = () => {
   console.log('create about');
   var elem = document.getElementById('modal1');
