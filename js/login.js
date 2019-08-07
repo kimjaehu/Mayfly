@@ -55,7 +55,6 @@
         .doc(user.uid)
         .get()
         .then(doc => {
-          console.log(doc.exists);
           if (doc.exists) {
             console.log('doc', doc.data());
             // renderDashboard(doc.data());

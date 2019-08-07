@@ -11,24 +11,6 @@ db.enablePersistence().catch(err => {
   }
 });
 
-//real time listener
-// db.collection('users')
-//   .doc(currUser)
-//   .onSnapshot(snapshot => {
-//     console.log('snapshot', snapshot.docChanges());
-//     // snapshot.docChanges().forEach(change => {
-//     //   // console.log(change, change.doc.data(), change.doc.id);
-//     //   if (change.type === 'added') {
-//     //     // add data to web page
-//     //     renderRecipe(change.doc.data(), change.doc.id);
-//     //   }
-//     //   if (change.type === 'removed') {
-//     //     //remove data from web page
-//     //     removeRecipe(change.doc.id);
-//     //   }
-//     // });
-//   });
-
 // get country code
 $.ajax({
   url: 'https://geoip-db.com/jsonp',
@@ -55,15 +37,32 @@ $.ajax({
   }
 });
 
+//real time listener
+// db.collection('users')
+//   .doc(currUser)
+//   .onSnapshot(snapshot => {
+//     console.log('snapshot', snapshot.docChanges());
+//     // snapshot.docChanges().forEach(change => {
+//     //   // console.log(change, change.doc.data(), change.doc.id);
+//     //   if (change.type === 'added') {
+//     //     // add data to web page
+//     //     renderRecipe(change.doc.data(), change.doc.id);
+//     //   }
+//     //   if (change.type === 'removed') {
+//     //     //remove data from web page
+//     //     removeRecipe(change.doc.id);
+//     //   }
+//     // });
+//   });
+
 // add new about
 const form = document.querySelector('form');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+
   let metric = document.getElementById('metric').style.display;
   let about = {};
-
-  console.log('country code', country_code);
 
   if (metric === 'block') {
     about = {
@@ -113,11 +112,17 @@ form.addEventListener('submit', e => {
     };
   }
 
-  console.log(about);
   db.collection('users')
     .doc(firebase.auth().currentUser.uid)
     .set(about)
     .then(() => {
+      db.collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then(doc => {
+          console.log(doc.data());
+          renderDashboard(doc.data());
+        });
       closeModal();
     })
     .catch(err => console.log(err));
