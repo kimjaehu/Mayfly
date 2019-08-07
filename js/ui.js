@@ -50,44 +50,59 @@ unitSwitch.addEventListener('click', e => {
 });
 
 const renderDashboard = data => {
+  console.log('renderdashboard', data);
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'doughnut',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: [],
       datasets: [
         {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'Life expectancy',
+          data: [25, data.life_expectancy - 25],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
+          ]
         }
       ]
     },
     options: {
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
+      rotation: 1 * Math.PI,
+      circumference: 1 * Math.PI,
+      responsive: true,
+      legend: {
+        position: 'bottom'
+      },
+      title: {
+        display: true,
+        text: 'Life expected'
+      },
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = dataset.data.reduce(function(
+              previousValue,
+              currentValue,
+              currentIndex,
+              array
+            ) {
+              return previousValue + currentValue;
+            });
+            var currentValue = dataset.data[tooltipItem.index];
+            var percentage = Math.floor((currentValue / total) * 100 + 0.5);
+            return percentage + '%';
           }
-        ]
+        }
       }
     }
   });
