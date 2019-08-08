@@ -37,10 +37,11 @@ $.ajax({
   }
 });
 
-//real time listener
-// db.collection('users')
-//   .doc(currUser)
+// real time listener
+// db.collection('schedules')
+//   .doc(firebase.auth().currentUser.uid)
 //   .onSnapshot(snapshot => {
+//     console.log('2 this code ran');
 //     console.log('snapshot', snapshot.docChanges());
 //     // snapshot.docChanges().forEach(change => {
 //     //   // console.log(change, change.doc.data(), change.doc.id);
@@ -120,7 +121,6 @@ form.addEventListener('submit', e => {
         .doc(firebase.auth().currentUser.uid)
         .get()
         .then(doc => {
-          console.log(doc.data());
           renderDashboard(doc.data());
         });
       closeModal();

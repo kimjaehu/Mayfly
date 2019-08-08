@@ -47,7 +47,6 @@
 
   ui.start('#firebaseui-auth-container', uiConfig);
   auth.onAuthStateChanged(user => {
-    // console.log(user.uid);
     if (user) {
       let uid = user.uid;
       loginUI(uid);
@@ -67,7 +66,7 @@
           }
         })
         .catch(err => {
-          console.log(err.message);
+          console.log('error: ', err.message);
         });
     } else {
       loginUI();

@@ -181,7 +181,6 @@ const renderDashboard = data => {
         height = chart.chart.height,
         ctx = chart.chart.ctx;
       ctx.restore();
-      console.log('ctx', ctx);
       var fontSize = (height / 70).toFixed(2);
       ctx.font = fontSize + 'em Arial';
       ctx.textBaseline = 'top';
