@@ -293,13 +293,13 @@ const renderAbout = data => {
 };
 
 // remove recipe
-const recipeContainer = document.querySelector('.about');
-recipeContainer.addEventListener('click', e => {
-  console.log(e);
-  // if (e.target.tagName === 'I') {
-  //   const id = e.target.getAttribute('data-id');
-  //   db.collection('recipes')
-  //     .doc(id)
-  //     .delete();
-  // }
-});
+// const recipeContainer = document.querySelector('.about');
+// recipeContainer.addEventListener('click', e => {
+//   console.log(e);
+//   // if (e.target.tagName === 'I') {
+//   //   const id = e.target.getAttribute('data-id');
+//   //   db.collection('recipes')
+//   //     .doc(id)
+//   //     .delete();
+//   // }
+// });

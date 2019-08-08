@@ -80,7 +80,38 @@ const showDaysWillLive = (time, birthday) => {
   daysWillLive.innerHTML = `${livedYears}yr ${livedMonths}mo ${livedWeeks}wk ${livedDays}day`;
 };
 
+const showDiff = () => {
+  let now = moment([]);
+  let endOfYear = moment().endOf('year');
+  let endOfWeek = moment().endOf('isoWeek');
 
+  let weeks = endOfYear.diff(now, 'weeks');
+  let days = endOfWeek.diff(now, 'days');
+
+  let weeksLeft = document.getElementById('weeks-left');
+  let daysLeft = document.getElementById('days-left');
+
+  weeksLeft.innerHTML = weeks;
+  daysLeft.innerHTML = days;
+};
+
+const showTimeInfo = () => {
+  let now = moment([]);
+  let endOfDay = moment().endOf('day');
+  let duration = moment.duration(endOfDay.diff(now));
+
+  let hours = duration.hours();
+  duration.subtract(moment.duration(hours, 'hours'));
+  let minutes = duration.minutes();
+  duration.subtract(moment.duration(minutes, 'minutes'));
+  let seconds = duration.seconds();
+  duration.subtract(moment.duration(seconds, 'seconds'));
+  let milliseconds = duration.milliseconds();
+  duration.subtract(moment.duration(milliseconds, 'milliseconds'));
+
+  let timeLeft = document.getElementById('time-left');
+  timeLeft.innerHTML = `${hours}h ${minutes}m ${seconds}s ${milliseconds}`;
+};
 
 const renderDashboard = data => {
   console.log('renderdashboard', data);
@@ -164,6 +195,9 @@ const renderDashboard = data => {
   showDaysLived(data.date_of_birth);
   showDaysWillLive(data.life_expectancy, data.date_of_birth);
 };
+setInterval(showDiff, 10000);
+setInterval(showTimeInfo, 1);
+
 const createAbout = () => {
   console.log('create about');
   var elem = document.getElementById('modal1');
