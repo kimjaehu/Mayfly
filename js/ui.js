@@ -181,8 +181,9 @@ const renderDashboard = data => {
         height = chart.chart.height,
         ctx = chart.chart.ctx;
       ctx.restore();
+      console.log('ctx', ctx);
       var fontSize = (height / 70).toFixed(2);
-      ctx.font = fontSize + 'em Courier';
+      ctx.font = fontSize + 'em Arial';
       ctx.textBaseline = 'top';
       var text = Math.floor((25 / data.life_expectancy) * 100 + 0.5) + '%',
         textX = Math.round((width - ctx.measureText(text).width) / 2),

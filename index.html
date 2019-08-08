@@ -218,20 +218,44 @@
         
       </div>
       <div class="row">
-        <div class="col s4" id="weeks-left"> 35 </div>
-        <div class="col s4" id="days-left"> 123 </div>
-        <div class="col s4" id="time-left"> 3:12:45.123 </div>
+        <div class="col s3" id="weeks-left"> 35 </div>
+        <div class="col s3" id="days-left"> 123 </div>
+        <div class="col s6" id="time-left"> 3h 12m 45s 123 </div>
       </div>
 
       <div class="row">
         <h5 class="col s12 center">Spend your time</h5>
       </div>
+
+      <div class="row">
+        <div class="col s12 m6">
+            <div class="card-panel schedule white" data-id="${id}">
+                <i class="medium material-icons">audiotrack</i>
+              <div class="schedule-details">
+                <div class="schedule-title">Listen to music</div>
+                <div class="schedule-time">9:00pm - 9:30pm</div>
+              </div>
+              <div class="schedule-delete">
+                <i class="material-icons" data-id="${id}">delete_outline</i>
+              </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card-panel schedule white" data-id="${id}">
+                <i class="medium material-icons">local_library</i>
+              <div class="schedule-details">
+                <div class="schedule-title">Read a book</div>
+                <div class="schedule-time">10:00pm - 11:00pm</div>
+              </div>
+              <div class="schedule-delete">
+                <i class="material-icons" data-id="${id}">delete_outline</i>
+              </div>
+            </div>
+        </div>
+
+      </div>
       
-
-
-
-
-
 
       <div class="center">
           <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
