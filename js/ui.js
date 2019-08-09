@@ -110,7 +110,7 @@ const showTimeInfo = () => {
   duration.subtract(moment.duration(milliseconds, 'milliseconds'));
 
   let timeLeft = document.getElementById('time-left');
-  timeLeft.innerHTML = `${hours}h ${minutes}m ${seconds}s ${milliseconds}`;
+  timeLeft.innerHTML = `${hours}' ${minutes}" ${seconds} ${milliseconds}`;
 };
 
 const renderDashboard = data => {

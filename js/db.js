@@ -39,7 +39,7 @@ $.ajax({
 
 // real time listener
 // db.collection('schedules')
-//   .doc(firebase.auth().currentUser.uid)
+//   // .doc(firebase.auth().currentUser.uid)
 //   .onSnapshot(snapshot => {
 //     console.log('2 this code ran');
 //     console.log('snapshot', snapshot.docChanges());
@@ -57,7 +57,7 @@ $.ajax({
 //   });
 
 // add new about
-const form = document.querySelector('form');
+const form = document.getElementById('about-form');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -291,6 +291,26 @@ const renderAbout = data => {
     var instance = M.FormSelect.init(elm, { input: data.stress });
   }
 };
+
+//add new schedule
+// const scheduleForm = document.getElementById('schedule-form');
+
+// scheduleForm.addEventListener('submit', e => {
+//   e.preventDefault;
+
+//   const schedule = {
+//     from: form.from.value,
+//     to: form.to.value,
+//     title: form.title.value
+//   };
+//   console.log(schedule);
+//   db.collection('users')
+//     .doc(firebase.auth().currentUser.uid)
+//     .set(schedule)
+//     .then(() => {
+//       console.log('schedule created');
+//     });
+// });
 
 // remove recipe
 // const recipeContainer = document.querySelector('.about');
