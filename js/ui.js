@@ -246,28 +246,30 @@ document.addEventListener('DOMContentLoaded', function() {
 //   var instance = M.Autocomplete.init(elem, { data });
 // });
 
-// render recipe
-const renderRecipe = (data, id) => {
+// render schedule
+const schedules = document.querySelector('.schedules');
+const renderSchedule = (data, id) => {
   const html = `
-    <div class="card-panel recipe white row" data-id="${id}">
-      <img src="/img/recipe.png" alt="recipe thumb" />
-      <div class="recipe-details">
-        <div class="recipe-title">${data.title}</div>
-        <div class="recipe-ingredients"
-          >${data.ingredients}</div
-        >
+  <div class="col s12 m6">
+    <div class="card-panel schedule white" data-id="${id}">
+        <i class="medium material-icons">${data.icon}</i>
+      <div class="schedule-details">
+        <div class="schedule-title">${data.title}</div>
+        <div class="schedule-from">${data.from}</div>
+        <div class="schedule-to">${data.to}}</div>
       </div>
-      <div class="recipe-delete">
+      <div class="schedule-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>
       </div>
     </div>
+  </div>
   `;
 
-  recipes.innerHTML += html;
+  schedules.innerHTML += html;
 };
 
-// remove recipe from DOM
-const removeRecipe = id => {
-  const recipe = document.querySelector(`.recipe[data-id = ${id}]`);
-  recipe.remove();
+// remove schedule from DOM
+const removeSchedule = id => {
+  const schedule = document.querySelector(`.schedule[data-id = ${id}]`);
+  schedule.remove();
 };

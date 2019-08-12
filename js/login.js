@@ -61,15 +61,20 @@
             renderDashboard(doc.data());
             loginUI(user);
             console.log(uid);
+
             db.collection('users')
               .doc(user.uid)
               .collection('schedules')
               .get()
-              .then(doc => {
-                console.log('doc', doc);
-                // snapshot.forEach(element => {
-                //   console.log(element);
-                // });
+              .then(snapshot => {
+                snapshot.forEach(element => {
+                  console.log(
+                    'element id and data',
+                    element.id,
+                    element.data()
+                  );
+                  renderSchedule(element.data(), element.id);
+                });
               })
               .catch(err => {
                 console.log('error:', err.message);

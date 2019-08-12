@@ -54,11 +54,11 @@ nav .sidenav-trigger {
 .schedule-title {
   font-weight: bold;
 }
-.schedule-time {
+.schedule-from {
   font-size: 0.8em;
 }
 
-.schedule-date {
+.schedule-to {
   font-size: 0.8em;
 }
 
