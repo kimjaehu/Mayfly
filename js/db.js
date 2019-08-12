@@ -17,7 +17,6 @@ $.ajax({
   jsonpCallback: 'callback',
   dataType: 'jsonp',
   success: location => {
-    console.log(location);
     country_code = location.country_code;
     country_name = location.country_name;
     state = location.state;
@@ -38,7 +37,9 @@ $.ajax({
 });
 
 // real time listener
-// db.collection('schedules')
+// db.collection('users')
+//   .doc(firebase.auth().currentUser.uid)
+//   .collection('schedules')
 //   // .doc(firebase.auth().currentUser.uid)
 //   .onSnapshot(snapshot => {
 //     console.log('2 this code ran');

@@ -49,6 +49,7 @@
   auth.onAuthStateChanged(user => {
     if (user) {
       let uid = user.uid;
+
       loginUI(uid);
       db.collection('users')
         .doc(user.uid)
@@ -56,10 +57,23 @@
         .then(doc => {
           if (doc.exists) {
             console.log('doc', doc.data());
-            // renderDashboard(doc.data());
             renderAbout(doc.data());
             renderDashboard(doc.data());
             loginUI(user);
+            console.log(uid);
+            db.collection('users')
+              .doc(user.uid)
+              .collection('schedules')
+              .get()
+              .then(doc => {
+                console.log('doc', doc);
+                // snapshot.forEach(element => {
+                //   console.log(element);
+                // });
+              })
+              .catch(err => {
+                console.log('error:', err.message);
+              });
           } else {
             console.log('new create');
             createAbout();

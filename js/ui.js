@@ -114,7 +114,6 @@ const showTimeInfo = () => {
 };
 
 const renderDashboard = data => {
-  console.log('renderdashboard', data);
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'doughnut',
