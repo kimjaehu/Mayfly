@@ -88,6 +88,7 @@
           console.log('error: ', err.message);
         });
     } else {
+      let uid = null;
       loginUI();
     }
   });

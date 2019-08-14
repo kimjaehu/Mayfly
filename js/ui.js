@@ -114,6 +114,10 @@ const showTimeInfo = () => {
 };
 
 const renderDashboard = data => {
+  Chart.defaults.global.defaultFontColor = 'red';
+  Chart.defaults.global.defaultFontFamily = 'Montserrat';
+  Chart.defaults.global.defaultFontSize = 24;
+
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'doughnut',
@@ -145,7 +149,7 @@ const renderDashboard = data => {
       },
       title: {
         display: true,
-        text: 'Life expected'
+        text: 'Life expected: ' + data.life_expectancy + ' yrs'
       },
       animation: {
         animateScale: true,

@@ -1,8 +1,14 @@
 /* colours */
 :root {
+
   --primary: #ffe9d2;
   --secondary: #ffe1c4;
   --title: #ff8816;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 
 /* layout styles */
@@ -36,7 +42,7 @@ nav .sidenav-trigger {
 }
 .schedule img {
   grid-area: image;
-  max-width: 60px;
+  max-width: 30px;
 }
 .schedule-details {
   grid-area: details;
@@ -119,4 +125,9 @@ input {
 
 .hidden {
   display: none;
+}
+
+.dash-comp {
+  /* font-family: 'Montserrat', sans-serif;
+  font-weight: bold; */
 }
