@@ -11,6 +11,11 @@ body {
   font-weight: bold;
 }
 
+.schedule-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
 /* layout styles */
 nav {
   background: var(--primary);

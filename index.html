@@ -240,23 +240,69 @@
             <canvas id="myChart" width="400" height="200"></canvas>
         </div>
       </div>
-      <div class="dash-comp row">
-        <div class="col s6" id="days-lived"> 35yr 7wk 12day </div>
-        <div class="col s6" id="days-will-live"> 35yr 7wk 12day </div>
-      </div>
-        <div class="row">
-        
-      </div>
-      <div class="dash-comp row">
-        <div class="col s3" id="weeks-left"> 35 </div>
-        <div class="col s3" id="days-left"> 123 </div>
-        <div class="col s6" id="time-left"> 3h 12m 45s 123 </div>
-      </div>
+
 
       <div class="row">
-        <h5 class="col s12 center">Spend your time</h5>
+          <h5 class="schedule-title col s12 center">How much time do I have?</h5>
+        </div>
+      <div class="divider"></div>
+
+      <div class="dash-comp infos row">
+          <div class="col s6 m6">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-title">Time Lived</div>
+                  <div class="divider"></div>
+                  <div class="info-date" id="days-lived"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col s6 m6">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-title">Time Left</div>
+                  <div class="divider"></div>
+                  <div class="info-date" id="days-will-live"></div>
+                </div>
+              </div>
+          </div>
       </div>
 
+      <div class="dash-comp infos row">
+          <div class="col s3 m3">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-title">Next year</div>
+                  <div class="divider"></div>
+                  <div class="info-date" id="weeks-left"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col s3 m3">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-title">Until next monday</div>
+                  <div class="divider"></div>
+                  <div class="info-date" id="days-left"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col s6 m6">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-title">Until tomorrow</div>
+                  <div class="divider"></div>
+                  <div class="info-date" id="time-left"></div>
+                </div>
+              </div>
+          </div>
+      </div>     
+
+      <div class="row">
+        <h5 class="schedule-title col s12 center">Spend your time</h5>
+      </div>
+      <div class="divider"></div>
+      
       <div class="dash-comp schedules row">
         <div class="col s12 m6">
             <div class="card-panel schedule white" data-id="${id}">
