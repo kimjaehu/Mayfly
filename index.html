@@ -48,7 +48,7 @@
     </div>
 
     <!-- sidemenu add schedule -->
-    <!-- <div id="side-form" class="sidenav side-form">
+    <div id="side-form" class="sidenav side-form">
         <form class="add-schedule container section">
           <h6>New schedule</h6>
           <div class="divider"></div>
@@ -73,7 +73,7 @@
             <button class="btn-small">Add</button>
           </div>
         </form>
-      </div> -->
+      </div>
   
     <!-- About yourself -->
     
@@ -236,7 +236,7 @@
     </div> -->
     <div class="dashboard container orange-text text-darken-3">
       <div class="row">
-        <h5 class="schedule-title col s12 center">Your time</h5>
+        <h5 class="schedule-title col s12 center">Your time is <span id='total-time'></span></h5>
     </div>
 
     <div class="dash-comp row">
@@ -312,20 +312,22 @@
     
 
     <div class="row">
-      <h5 class="schedule-title col s12 center">Spend it meaningfully</h5>
+      <h5 class="schedule-title col s12 center">Spend it meaningfully...</h5>
     </div>
 
     <div class="center add-schedule">
-        <div id="add-something-todo">Add something to do</div>
+        <div id="add-something-todo">
+          <span>>>> Add something to do</span>
+        </div>
     </div>
-
       <div class="dash-comp schedules row"></div>
-      
-
-      
-      
     </div>
 
+    <div class="center add-schedule signOutDiv" style="display: none;" onclick="userSignOut()">
+        <div id="add-something-todo">
+          <span>Sign Out</span>
+        </div>
+    </div>
 
     <script src="/js/firebase.js"></script>
     <script>

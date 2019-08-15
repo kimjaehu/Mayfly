@@ -1,19 +1,29 @@
 const dashboard = document.querySelector('.dashboard');
 const aboutDiv = document.querySelector('.about');
 const loginDiv = document.querySelector('.login');
-
+const signOutDiv = document.querySelector('.signOutDiv');
 const loginUI = user => {
   if (user) {
     loginDiv.style.display = 'none';
     // loginDiv.style.hidden = true;
     // aboutDiv.style.display = 'block';
     dashboard.style.display = 'block';
+    signOutDiv.style.display = 'block';
+    document.addEventListener('DOMContentLoaded', function() {
+      // ad financial info
+      // const financialInfoForms = document.querySelectorAll('.side-menu');
+      // M.Sidenav.init(menus, { edge: 'right' });
+      // add recipe form
+      const scheduleForms = document.querySelectorAll('.side-form');
+      M.Sidenav.init(scheduleForms, { edge: 'left', closeOnClick: true });
+    });
     // dashboard.style.hidden = false;
   } else {
     loginDiv.style.display = 'block';
     // loginDiv.style.hidden = false;
     // aboutDiv.style.display = 'none';
     dashboard.style.display = 'none';
+    signOutDiv.style.display = 'none';
     // dashboard.style.hidden = true;
   }
 };
@@ -114,7 +124,6 @@ const showTimeInfo = () => {
   const secLeft = document.getElementById('sec-left');
   const milsecLeft = document.getElementById('milsec-left');
   // timeLeft.innerHTML = `${hours}' ${minutes}" ${seconds} ${milliseconds}`;
-  // timeLeft.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
   hrLeft.innerHTML = hours;
   minLeft.innerHTML = minutes;
   secLeft.innerHTML = seconds;
@@ -122,6 +131,7 @@ const showTimeInfo = () => {
 };
 
 const renderDashboard = data => {
+  const totalTime = document.getElementById('total-time');
   const lifeBar = document.getElementsByClassName('life-bar-fill')[0];
   const lifePercentage = document.getElementsByClassName('life-bar-value')[0];
   const today = moment([]);
@@ -129,6 +139,8 @@ const renderDashboard = data => {
   const total = moment(data.life_expectancy);
   const age = today.diff(dateOfBirth, 'years', true);
   const percentage = Math.floor((age / total) * 100 + 0.5);
+
+  totalTime.innerHTML = data.life_expectancy + 'years';
 
   const id = setInterval(frame, 10);
   let width = 10;
@@ -302,8 +314,7 @@ const renderSchedule = (data, id) => {
     const formattedFrom = moment(scheduleFrom).format('MMM. DD, YYYY, hh:mm a');
     const scheduleTo = data.to.toDate();
     const formattedTo = moment(scheduleTo).format('MMM. DD, YYYY, hh:mm a');
-    console.log(scheduleFrom, scheduleTo);
-    const html = `
+    let html = `
     <div class="col s12 m12 l6">
       <div class="card-panel schedule white" data-id="${id}">
           <i class="medium material-icons">${data.icon}</i>
@@ -319,7 +330,7 @@ const renderSchedule = (data, id) => {
       </div>
     </div>
     `;
-
+    console.log(html);
     resolve((schedules.innerHTML += html));
   });
 };
