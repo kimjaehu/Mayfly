@@ -48,7 +48,7 @@
     </div>
 
     <!-- sidemenu add schedule -->
-    <div id="side-form" class="sidenav side-form">
+    <div id="side-form" class="sidenav side-form" style="display: none;">
         <form class="add-schedule container section">
           <h6>New schedule</h6>
           <div class="divider"></div>
@@ -62,11 +62,11 @@
             <label for="title">Schedule</label>
           </div>
           <div class="input-field">
-            <input id="date-from" type="text" class="datepicker" name="date_from" required=""/>
+            <input id="date-from" type="text" class="datepicker-add" name="date_from" required=""/>
             <label for="from">From</label>
           </div>
           <div class="input-field">
-            <input id="date-to" type="text" class="datepicker" name="date_to" required=""/>
+            <input id="date-to" type="text" class="datepicker-add" name="date_to" required=""/>
             <label for="from">To</label>
           </div>
           <div class="input-field center">
@@ -315,15 +315,20 @@
       <h5 class="schedule-title col s12 center">Spend it meaningfully...</h5>
     </div>
 
-    <div class="center add-schedule">
-        <div id="add-something-todo">
-          <span>>>> Add something to do</span>
-        </div>
+    <div class="center button-style">
+        <a
+        class="sidenav-trigger"
+        data-target="side-form"
+        >
+          <div id="add-something-todo">
+            <span>>>> Add something to do</span>
+          </div>
+        </a>
     </div>
       <div class="dash-comp schedules row"></div>
     </div>
 
-    <div class="center add-schedule signOutDiv" style="display: none;" onclick="userSignOut()">
+    <div class="center button-style signOutDiv" style="display: none;" onclick="userSignOut()">
         <div id="add-something-todo">
           <span>Sign Out</span>
         </div>

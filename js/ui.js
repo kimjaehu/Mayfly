@@ -2,6 +2,7 @@ const dashboard = document.querySelector('.dashboard');
 const aboutDiv = document.querySelector('.about');
 const loginDiv = document.querySelector('.login');
 const signOutDiv = document.querySelector('.signOutDiv');
+const sideNavDiv = document.querySelector('.sidenav');
 const loginUI = user => {
   if (user) {
     loginDiv.style.display = 'none';
@@ -9,14 +10,7 @@ const loginUI = user => {
     // aboutDiv.style.display = 'block';
     dashboard.style.display = 'block';
     signOutDiv.style.display = 'block';
-    document.addEventListener('DOMContentLoaded', function() {
-      // ad financial info
-      // const financialInfoForms = document.querySelectorAll('.side-menu');
-      // M.Sidenav.init(menus, { edge: 'right' });
-      // add recipe form
-      const scheduleForms = document.querySelectorAll('.side-form');
-      M.Sidenav.init(scheduleForms, { edge: 'left', closeOnClick: true });
-    });
+    sideNavDiv.style.display = 'block';
     // dashboard.style.hidden = false;
   } else {
     loginDiv.style.display = 'block';
@@ -24,9 +18,19 @@ const loginUI = user => {
     // aboutDiv.style.display = 'none';
     dashboard.style.display = 'none';
     signOutDiv.style.display = 'none';
+    sideNavDiv.style.display = 'none';
     // dashboard.style.hidden = true;
   }
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+  // ad financial info
+  // const financialInfoForms = document.querySelectorAll('.side-menu');
+  // M.Sidenav.init(menus, { edge: 'right' });
+  // add recipe form
+  const scheduleForms = document.querySelectorAll('.side-form');
+  M.Sidenav.init(scheduleForms, { edge: 'left', closeOnClick: true });
+});
 
 const aboutUI = user => {};
 
@@ -277,6 +281,16 @@ document.addEventListener('DOMContentLoaded', function() {
     autoClose: true,
     disableDayFn: day => {
       return day.valueOf() > new Date().valueOf();
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.datepicker-add');
+  var instances = M.Datepicker.init(elems, {
+    autoClose: true,
+    disableDayFn: day => {
+      return day.valueOf() <= new Date().valueOf();
     }
   });
 });

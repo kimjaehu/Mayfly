@@ -11,6 +11,7 @@ body {
 }
 
 .schedule-title {
+  margin-top: 2em;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
@@ -171,7 +172,7 @@ h5 {
   color: #069;
 }
 
-.add-schedule {
+.button-style {
   padding: 1em;
   border-width: 2px;
   border-color: #d3d3d3;
