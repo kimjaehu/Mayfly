@@ -109,97 +109,141 @@ const showTimeInfo = () => {
   let milliseconds = duration.milliseconds();
   duration.subtract(moment.duration(milliseconds, 'milliseconds'));
 
-  let timeLeft = document.getElementById('time-left');
-  timeLeft.innerHTML = `${hours}' ${minutes}" ${seconds} ${milliseconds}`;
+  const hrLeft = document.getElementById('hr-left');
+  const minLeft = document.getElementById('min-left');
+  const secLeft = document.getElementById('sec-left');
+  const milsecLeft = document.getElementById('milsec-left');
+  // timeLeft.innerHTML = `${hours}' ${minutes}" ${seconds} ${milliseconds}`;
+  // timeLeft.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+  hrLeft.innerHTML = hours;
+  minLeft.innerHTML = minutes;
+  secLeft.innerHTML = seconds;
+  // milsecLeft.innerHTML = milliseconds;
 };
 
 const renderDashboard = data => {
-  Chart.defaults.global.defaultFontColor = 'red';
-  Chart.defaults.global.defaultFontFamily = 'Montserrat';
-  Chart.defaults.global.defaultFontSize = 24;
+  const lifeBar = document.getElementsByClassName('life-bar-fill')[0];
+  const lifePercentage = document.getElementsByClassName('life-bar-value')[0];
+  const today = moment([]);
+  const dateOfBirth = moment(data.date_of_birth);
+  const total = moment(data.life_expectancy);
+  const age = today.diff(dateOfBirth, 'years', true);
+  const percentage = Math.floor((age / total) * 100 + 0.5);
 
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [],
-      datasets: [
-        {
-          label: 'Life expectancy',
-          data: [25, data.life_expectancy - 25],
-          backgroundColor: [
-            '#ff9800',
-            '#fff',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderColor: ['#ff9800', '#ff9800', '#ff9800', '#ff9800', '#ff9800'],
-          borderWidth: 2
-        }
-      ]
-    },
-    options: {
-      rotation: 1 * Math.PI,
-      circumference: 1 * Math.PI,
-      responsive: true,
-      legend: {
-        position: 'bottom'
-      },
-      title: {
-        display: true,
-        text: 'Life expected: ' + data.life_expectancy + ' yrs'
-      },
-      animation: {
-        animateScale: true,
-        animateRotate: true
-      },
-
-      tooltips: {
-        callbacks: {
-          label: function(tooltipItem, data) {
-            var dataset = data.datasets[tooltipItem.datasetIndex];
-            var total = dataset.data.reduce(function(
-              previousValue,
-              currentValue,
-              currentIndex,
-              array
-            ) {
-              return previousValue + currentValue;
-            });
-            var currentValue = dataset.data[tooltipItem.index];
-            var percentage = Math.floor((currentValue / total) * 100 + 0.5);
-            return percentage + '%';
-          }
-        }
-      }
+  const id = setInterval(frame, 10);
+  let width = 10;
+  function frame() {
+    if (width >= percentage) {
+      clearInterval(id);
+    } else {
+      width++;
+      lifeBar.style.width = width + '%';
+      lifePercentage.innerHTML = width * 1 + '% lived';
     }
-  });
+  }
 
-  //Plugin for center text
-  Chart.pluginService.register({
-    beforeDraw: function(chart) {
-      var width = chart.chart.width,
-        height = chart.chart.height,
-        ctx = chart.chart.ctx;
-      ctx.restore();
-      var fontSize = (height / 70).toFixed(2);
-      ctx.font = fontSize + 'em Arial';
-      ctx.textBaseline = 'top';
-      var text = Math.floor((25 / data.life_expectancy) * 100 + 0.5) + '%',
-        textX = Math.round((width - ctx.measureText(text).width) / 2),
-        textY = height / 1.4;
-      ctx.fillText(text, textX, textY);
-      ctx.save();
-    }
-  });
+  const currentYear = document.getElementById('current-year');
+  const now = new Date();
+  const yearNum = now.getFullYear() + 1;
+  currentYear.innerHTML = yearNum;
+
+  // const today = moment([]);
+  // const dateOfBirth = moment(data.date_of_birth);
+  // const total = moment(data.life_expectancy);
+  // const age = today.diff(dateOfBirth, 'years', true);
+  // console.log('current and percentage', age);
+  // setInterval((age, total) => {
+  //   let percentage = Math.floor((age / total) * 100 + 0.5);
+
+  //   lifeBar.style.setProperty('--width', width + 0.1);
+  // }, 5);
+
+  // Chart.defaults.global.defaultFontColor = 'red';
+  // Chart.defaults.global.defaultFontFamily = 'Montserrat';
+  // Chart.defaults.global.defaultFontSize = 24;
+
+  // var ctx = document.getElementById('myChart').getContext('2d');
+  // var myChart = new Chart(ctx, {
+  //   type: 'doughnut',
+  //   data: {
+  //     labels: [],
+  //     datasets: [
+  //       {
+  //         label: 'Life expectancy',
+  //         data: [25, data.life_expectancy - 25],
+  //         backgroundColor: [
+  //           '#ff9800',
+  //           '#fff',
+  //           'rgba(255, 206, 86, 1)',
+  //           'rgba(75, 192, 192, 1)',
+  //           'rgba(153, 102, 255, 1)',
+  //           'rgba(255, 159, 64, 1)'
+  //         ],
+  //         borderColor: ['#ff9800', '#ff9800', '#ff9800', '#ff9800', '#ff9800'],
+  //         borderWidth: 2
+  //       }
+  //     ]
+  //   },
+  //   options: {
+  //     rotation: 1 * Math.PI,
+  //     circumference: 1 * Math.PI,
+  //     responsive: true,
+  //     legend: {
+  //       position: 'bottom'
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: 'Life expected: ' + data.life_expectancy + ' yrs'
+  //     },
+  //     animation: {
+  //       animateScale: true,
+  //       animateRotate: true
+  //     },
+
+  //     tooltips: {
+  //       callbacks: {
+  //         label: function(tooltipItem, data) {
+  //           var dataset = data.datasets[tooltipItem.datasetIndex];
+  //           var total = dataset.data.reduce(function(
+  //             previousValue,
+  //             currentValue,
+  //             currentIndex,
+  //             array
+  //           ) {
+  //             return previousValue + currentValue;
+  //           });
+  //           var currentValue = dataset.data[tooltipItem.index];
+  //           var percentage = Math.floor((currentValue / total) * 100 + 0.5);
+  //           return percentage + '%';
+  //         }
+  //       }
+  //     }
+  //   }
+  // });
+
+  // //Plugin for center text
+  // Chart.pluginService.register({
+  //   beforeDraw: function(chart) {
+  //     var width = chart.chart.width,
+  //       height = chart.chart.height,
+  //       ctx = chart.chart.ctx;
+  //     ctx.restore();
+  //     var fontSize = (height / 100).toFixed(2);
+  //     ctx.font = fontSize + 'em sans-serif';
+  //     ctx.textBaseline = 'top';
+  //     var text = Math.floor((25 / data.life_expectancy) * 100 + 0.5) + '%',
+  //       textX = Math.round((width - ctx.measureText(text).width) / 2),
+  //       textY = height / 1.35;
+  //     ctx.fillText(text, textX, textY);
+  //     ctx.save();
+  //   }
+  // });
 
   showDaysLived(data.date_of_birth);
   showDaysWillLive(data.life_expectancy, data.date_of_birth);
 };
-setInterval(showDiff, 10000);
-setInterval(showTimeInfo, 1);
+setInterval(showDiff, 1000);
+setInterval(showTimeInfo, 1000);
 
 const createAbout = () => {
   console.log('create about');
@@ -253,14 +297,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // render schedule
 const schedules = document.querySelector('.schedules');
 const renderSchedule = (data, id) => {
+  const scheduleFrom = Date(data.from);
+  const formattedFrom = moment(scheduleFrom).format('MMM. DD, YYYY, hh:mm a');
+  const scheduleTo = Date(data.to);
+  const formattedTo = moment(scheduleTo).format('MMM. DD, YYYY, hh:mm a');
   const html = `
   <div class="col s12 m6">
     <div class="card-panel schedule white" data-id="${id}">
         <i class="medium material-icons">${data.icon}</i>
       <div class="schedule-details">
         <div class="schedule-title">${data.title}</div>
-        <div class="schedule-from">${data.from}</div>
-        <div class="schedule-to">${data.to}}</div>
+        <div class="schedule-from">${formattedFrom}</div>
+        <div class="schedule-to">${formattedTo}</div>
       </div>
       <div class="schedule-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>

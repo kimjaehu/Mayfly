@@ -34,6 +34,8 @@ exports.lifeExpectancy = functions.firestore
   .document('/users/{userId}')
   .onCreate(async (snapshot, context) => {
     const data = snapshot.data();
+
+    
     // const aboutData = snapshot.data();
     // const estimate = lifeCalculation(aboutData);
 

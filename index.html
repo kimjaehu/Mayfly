@@ -235,90 +235,107 @@
       </div>      
     </div> -->
     <div class="dashboard container orange-text text-darken-3">
-      <div class="dash-comp row">
-        <div class="col s12">
-            <canvas id="myChart" width="400" height="200"></canvas>
-        </div>
-      </div>
-
-
       <div class="row">
-          <h5 class="schedule-title col s12 center">How much time do I have?</h5>
+        <h5 class="schedule-title col s12 center">Your time</h5>
+    </div>
+
+    <div class="dash-comp row">
+      <div class="col s12">
+        <div class="life-bar life-bar-moved">
+          <span class="life-bar-value"></span>
+          <div class="life-bar-fill"></div>
         </div>
-      <div class="divider"></div>
-
-      <div class="dash-comp infos row">
-          <div class="col s6 m6">
-              <div class="info white">
-                <div class="info-details">
-                  <div class="info-title">Time Lived</div>
-                  <div class="divider"></div>
-                  <div class="info-date" id="days-lived"></div>
-                </div>
-              </div>
-          </div>
-          <div class="col s6 m6">
-              <div class="info white">
-                <div class="info-details">
-                  <div class="info-title">Time Left</div>
-                  <div class="divider"></div>
-                  <div class="info-date" id="days-will-live"></div>
-                </div>
-              </div>
-          </div>
+        
+          <!-- <canvas id="myChart" width="400" height="200"></canvas> -->
       </div>
+    </div>
 
-      <div class="dash-comp infos row">
-          <div class="col s3 m3">
-              <div class="info white">
-                <div class="info-details">
-                  <div class="info-title">Next year</div>
-                  <div class="divider"></div>
-                  <div class="info-date" id="weeks-left"></div>
-                </div>
-              </div>
-          </div>
-          <div class="col s3 m3">
-              <div class="info white">
-                <div class="info-details">
-                  <div class="info-title">Until next monday</div>
-                  <div class="divider"></div>
-                  <div class="info-date" id="days-left"></div>
-                </div>
-              </div>
-          </div>
-          <div class="col s6 m6">
-              <div class="info white">
-                <div class="info-details">
-                  <div class="info-title">Until tomorrow</div>
-                  <div class="divider"></div>
-                  <div class="info-date" id="time-left"></div>
-                </div>
-              </div>
-          </div>
-      </div>     
+    
 
-      <div class="row">
-        <h5 class="schedule-title col s12 center">Spend your time</h5>
-      </div>
-      <div class="divider"></div>
-      
-      <div class="dash-comp schedules row">
-        <div class="col s12 m6">
-            <div class="card-panel schedule white" data-id="${id}">
-                <i class="medium material-icons">audiotrack</i>
-              <div class="schedule-details">
-                <div class="schedule-title">Listen to music</div>
-                <div class="schedule-date">Aug. 4, 2019</div>
-                <div class="schedule-time">9:00pm - 9:30pm</div>
-              </div>
-              <div class="schedule-delete">
-                <i class="material-icons" data-id="${id}">delete_outline</i>
+    <div class="dash-comp infos row">
+        <div class="col s6 m6 center">
+            <div class="info white">
+              <div class="info-details left">
+                <div class="info-title">Lived</div>
+                <div class="info-date" id="days-lived"></div>
               </div>
             </div>
         </div>
+        <div class="col s6 m6 center">
+            <div class="info white">
+              <div class="info-details right">
+                <div class="info-title">Remaining</div>
+                <div class="info-date" id="days-will-live"></div>
+              </div>
+            </div>
+        </div>
+    </div>
 
-        <div class="col s12 m6">
+    <div class="row">
+      <h5 class="schedule-title col s12 center">Passes by quickly...</h5>
+    </div>
+
+      <div class="dash-comp infos row">
+        <div class="col s12 m12 center">
+            <div class="info white">
+              <div class="info-details">
+                <div class="info-date"><span class="Numbers" id="weeks-left"></span> weeks until <span id="current-year">2020</span> </div>
+                
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="dash-comp infos row">
+        <div class="col s12 m12 center">
+            <div class="info white">
+              <div class="info-details">
+                <div class="info-date"><span class="Numbers" id="days-left"></span> days until next Monday</div>
+              </div>
+            </div>
+        </div>
+      </div>    
+      
+      <div class="dash-comp infos row">
+          <div class="col s12 m12 center">
+              <div class="info white">
+                <div class="info-details">
+                  
+                  <div class="info-date"><span class="Numbers" id="hr-left"></span><span>h </span><span class="Numbers" id="min-left"></span><span>m </span><span class="Numbers" id="sec-left"></span><span>s</span></div>
+                </div>
+                <!-- <div><span id="milsec-left"></span></div> -->
+                <div class="info-title">Until tomorrow</div>
+              </div>
+          </div>
+      </div>  
+      
+      
+    
+
+    <div class="row">
+      <h5 class="schedule-title col s12 center">Spend it meaningfully</h5>
+    </div>
+
+    <div class="center add-schedule">
+        <div id="add-something-todo">Add something to do</div>
+    </div>
+
+      <div class="dash-comp schedules row">
+        <div class="col s12 m12 l6">
+          <div class="card-panel schedule white" data-id="${id}">
+              <i class="medium material-icons">audiotrack</i>
+            <div class="schedule-details">
+              <div class="schedule-title">Listen to music</div>
+              <div class="schedule-date">Aug. 4, 2019</div>
+              <div class="schedule-time">9:00pm - 9:30pm</div>
+            </div>
+            <div class="schedule-countdown">agddas</div>
+            <div class="schedule-delete">
+              <i class="material-icons" data-id="${id}">delete_outline</i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m12 l6">
             <div class="card-panel schedule white" data-id="${id}">
                 <i class="medium material-icons">local_library</i>
               <div class="schedule-details">
@@ -326,6 +343,7 @@
                 <div class="schedule-date">Aug. 4, 2019</div>
                 <div class="schedule-time">10:00pm - 11:00pm</div>
               </div>
+              <div class="schedule-countdown">agddas</div>
               <div class="schedule-delete">
                 <i class="material-icons" data-id="${id}">delete_outline</i>
               </div>
@@ -335,9 +353,7 @@
       </div>
       
 
-      <div class="center">
-          <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
+      
       
     </div>
 

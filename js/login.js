@@ -68,11 +68,6 @@
               .get()
               .then(snapshot => {
                 snapshot.forEach(element => {
-                  console.log(
-                    'element id and data',
-                    element.id,
-                    element.data()
-                  );
                   renderSchedule(element.data(), element.id);
                 });
               })
