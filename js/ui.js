@@ -297,27 +297,31 @@ document.addEventListener('DOMContentLoaded', function() {
 // render schedule
 const schedules = document.querySelector('.schedules');
 const renderSchedule = (data, id) => {
-  const scheduleFrom = Date(data.from);
-  const formattedFrom = moment(scheduleFrom).format('MMM. DD, YYYY, hh:mm a');
-  const scheduleTo = Date(data.to);
-  const formattedTo = moment(scheduleTo).format('MMM. DD, YYYY, hh:mm a');
-  const html = `
-  <div class="col s12 m6">
-    <div class="card-panel schedule white" data-id="${id}">
-        <i class="medium material-icons">${data.icon}</i>
-      <div class="schedule-details">
-        <div class="schedule-title">${data.title}</div>
-        <div class="schedule-from">${formattedFrom}</div>
-        <div class="schedule-to">${formattedTo}</div>
-      </div>
-      <div class="schedule-delete">
-        <i class="material-icons" data-id="${id}">delete_outline</i>
+  return new Promise(resolve => {
+    const scheduleFrom = data.from.toDate();
+    const formattedFrom = moment(scheduleFrom).format('MMM. DD, YYYY, hh:mm a');
+    const scheduleTo = data.to.toDate();
+    const formattedTo = moment(scheduleTo).format('MMM. DD, YYYY, hh:mm a');
+    console.log(scheduleFrom, scheduleTo);
+    const html = `
+    <div class="col s12 m12 l6">
+      <div class="card-panel schedule white" data-id="${id}">
+          <i class="medium material-icons">${data.icon}</i>
+        <div class="schedule-details">
+          <div class="schedule-title">${data.title}</div>
+          <div class="schedule-from">${formattedFrom}</div>
+          <div class="schedule-to">${formattedTo}</div>
+        </div>
+        <div class="schedule-countdown">agddas</div>
+        <div class="schedule-delete">
+          <i class="material-icons" data-id="${id}">delete_outline</i>
+        </div>
       </div>
     </div>
-  </div>
-  `;
+    `;
 
-  schedules.innerHTML += html;
+    resolve((schedules.innerHTML += html));
+  });
 };
 
 // remove schedule from DOM

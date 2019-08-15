@@ -35,27 +35,30 @@ $.ajax({
     ipv4 = '0.0.0.0';
   }
 });
-
 // real time listener
-// db.collection('users')
-//   .doc(firebase.auth().currentUser.uid)
-//   .collection('schedules')
-//   // .doc(firebase.auth().currentUser.uid)
-//   .onSnapshot(snapshot => {
-//     console.log('2 this code ran');
-//     console.log('snapshot', snapshot.docChanges());
-//     // snapshot.docChanges().forEach(change => {
-//     //   // console.log(change, change.doc.data(), change.doc.id);
-//     //   if (change.type === 'added') {
-//     //     // add data to web page
-//     //     renderRecipe(change.doc.data(), change.doc.id);
-//     //   }
-//     //   if (change.type === 'removed') {
-//     //     //remove data from web page
-//     //     removeRecipe(change.doc.id);
-//     //   }
-//     // });
-//   });
+// console.log('asdgasdg', firebase.auth().currentUser);
+// if (firebase.auth().currentUser) {
+//   console.log('asdgasdga', firebase.auth().currentUser);
+//   // db.collection('users')
+//   //   // .doc(firebase.auth().currentUser.uid)
+//   //   // .collection('schedules')
+//   //   // .doc(firebase.auth().currentUser.uid)
+//   //   .onSnapshot(snapshot => {
+//   //     console.log('2 this code ran');
+//   //     console.log('snapshot', snapshot.docChanges());
+//   //     // snapshot.docChanges().forEach(change => {
+//   //     //   // console.log(change, change.doc.data(), change.doc.id);
+//   //     //   if (change.type === 'added') {
+//   //     //     // add data to web page
+//   //     //     renderRecipe(change.doc.data(), change.doc.id);
+//   //     //   }
+//   //     //   if (change.type === 'removed') {
+//   //     //     //remove data from web page
+//   //     //     removeRecipe(change.doc.id);
+//   //     //   }
+//   //     // });
+//   //   });
+// }
 
 // add new about
 const form = document.getElementById('about-form');

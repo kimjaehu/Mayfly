@@ -49,38 +49,33 @@
   auth.onAuthStateChanged(user => {
     if (user) {
       let uid = user.uid;
-
       loginUI(uid);
       db.collection('users')
-        .doc(user.uid)
-        .get()
-        .then(doc => {
+        .doc(uid)
+        .onSnapshot(doc => {
+          console.log('doc', doc.data());
           if (doc.exists) {
-            console.log('doc', doc.data());
             renderAbout(doc.data());
             renderDashboard(doc.data());
             loginUI(user);
-            console.log(uid);
 
             db.collection('users')
               .doc(user.uid)
               .collection('schedules')
-              .get()
-              .then(snapshot => {
-                snapshot.forEach(element => {
-                  renderSchedule(element.data(), element.id);
+              .onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(async change => {
+                  if (change.type === 'added') {
+                    await renderSchedule(change.doc.data(), change.doc.id);
+                  }
+                  if (change.type === 'removed') {
+                    removeSchedule(change.doc.id);
+                  }
                 });
-              })
-              .catch(err => {
-                console.log('error:', err.message);
               });
           } else {
             console.log('new create');
             createAbout();
           }
-        })
-        .catch(err => {
-          console.log('error: ', err.message);
         });
     } else {
       let uid = null;
