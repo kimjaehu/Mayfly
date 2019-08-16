@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Wisdomtooth</title>
+    <title>Mayfly - Live today</title>
 
     <!-- css icons js -->
     <link type="text/css" href="/css/materialize.min.css" rel="stylesheet" />
@@ -40,17 +40,21 @@
   <body class="white">
     <!-- Login info -->
     <div class="login container orange-text text-darken-3" style="display: none;">
-      <h1 class="title center">Wisdomtooth</h1>
+      <div id="login-screen-container">
+        <h1 class="login-title center">Mayfly</h1>
+      </div>
+      
       <div>
         <div id="firebaseui-auth-container"></div>
         <div id="loader">Loading...</div>
       </div>
     </div>
-
-    <!-- sidemenu add schedule -->
-    <div id="side-form" class="sidenav side-form" style="display: none;">
-        <form class="add-schedule container section">
-          <h6>New schedule</h6>
+    <!-- dashboard info -->
+    <div class="dashboard-div" style="display: none;">
+      <!-- sidemenu add schedule -->
+      <div id="side-form" class="sidenav side-form">
+        <form id="schedule-form" class="add-schedule container section">
+          <h5>Plan today</h5>
           <div class="divider"></div>
           <div class="input-field">
             <input
@@ -61,278 +65,291 @@
             />
             <label for="title">Schedule</label>
           </div>
+
           <div class="input-field">
-            <input id="date-from" type="text" class="datepicker-add" name="date_from" required=""/>
-            <label for="from">From</label>
+            <input id="date" type="text" class="datepicker-add" name="date" required=""/>
+            <label for="date">Date</label>
+          </div>
+
+          <div class="input-field">
+            <input id="time" type="text" class="timepicker-add" name="time" required=""/>
+            <label for="Time">Time</label>
           </div>
           <div class="input-field">
-            <input id="date-to" type="text" class="datepicker-add" name="date_to" required=""/>
-            <label for="from">To</label>
+            <select type="select" id="duration" name="duration">
+              <option value="" disabled selected>Choose duration</option>
+              <option value="15">15 min</option>
+              <option value="30">30 min</option>
+              <option value="45">45 min</option>
+              <option value="60">1 hr</option>
+              <option value="90">1.5 hr</option>
+              <option value="120">2 hr</option>
+              <option value="180">3 hr</option>
+              <option value="240">4 hr</option>
+            </select>
+            <label>Duration</label>
           </div>
+
           <div class="input-field center">
             <button class="btn-small">Add</button>
           </div>
         </form>
       </div>
-  
-    <!-- About yourself -->
     
-    <div id="modal1" class="modal">
-      <form id="about-form" class="add-about section">
-        <div class="modal-content">
-          
-            <h6 class="title center">About you</h6>
-              <div class="divider"></div>
-                <div class="row">
-                  <div class="input-field">
-                    <div class="col s6">
-                      <label>
-                        <input id="male" name="gender" type="radio" value="Male"  checked/>
-                        <span>Male</span>
-                      </label>
-                    </div>
-                    <div class="col s6">
-                      <label>
-                        <input id="female" name="gender" type="radio" value="Female" />
-                        <span>Female</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
+      <!-- About yourself -->
       
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input id="date_of_birth" type="text" class="datepicker" name="date_of_birth" required=""/>
-                    <label for="date_of_birth">Date of birth</label>
-                  </div>
-                </div>
-                
-                <div class="row">
-                  <div class="col s12">
-                      <div id="unit-switch" class="switch" name="unit-switch">
+      <div id="modal1" class="modal">
+        <form id="about-form" class="add-about section">
+          <div class="modal-content">
+            
+              <h6 class="title center">About you</h6>
+                <div class="divider"></div>
+                  <div class="row">
+                    <div class="input-field">
+                      <div class="col s6">
                         <label>
-                          Imperial
-                          <input type="checkbox">
-                          <span class="lever"></span>
-                          Metric
+                          <input id="male" name="gender" type="radio" value="Male"  checked/>
+                          <span>Male</span>
                         </label>
                       </div>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div id="imperial" style="display:block">
-                    <div class="input-field with-unit col s3 m3">
-                      <input id="imperial-height-ft" placeholder="ft" name="imperial-height-ft" type="number" min="1" max="10" class="validate" required=""/>
-                      <label for="height">Height</label>  
-                    </div>
-                    <div class="input-field with-unit col s3 m3">
-                      <input id="imperial-height-in" placeholder="in" name="imperial-height-in" type="number" min="0" max="11" class="validate" required=""/>
-                    </div>
-                  
-                    <div class="input-field with-unit col s6 m6">
-                      <input id="imperial-weight" placeholder="lbs" name="imperial-weight" type="number" min="0" max="700" class="validate" required=""/>
-                      <label for="weight">weight</label>
+                      <div class="col s6">
+                        <label>
+                          <input id="female" name="gender" type="radio" value="Female" />
+                          <span>Female</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
-              
-                  <div id="metric" style="display:none">
-                    <div class="input-field with-unit col s6 m6">
-                      <input id="metric-height" placeholder="cm" name="height" type="number" min="50" max="250" class="validate"/>
-                      <label for="height">Height</label>  
-                    </div>
-                  
-                    <div class="input-field with-unit col s6 m6">
-                      <input id="metric-weight" placeholder="kg" name="weight" type="number" min="0" max="300" class="validate"/>
-                      <label for="weight">weight</label>
-                    </div>
-                  </div>
-                </div>
-    
-                <div class="input-field">
-                  <select type="select" id="smoking" name="smoking">
-                    <!-- <option value="" disabled selected>Do you smoke?</option> -->
-                    <option value="heavy">Heavy (&#8805; 1 pack/day)</option>
-                    <option value="light">Light (&#60; 1 pack/day)</option>
-                    <option value="former">Former smoker</option>
-                    <option value="never" selected>Never smoked</option>
-                  </select>
-                  <label>Do you smoke?</label>
-                </div>
-    
-                <div class="input-field">
-                    <select id="alcohol" name="alcohol">
-                    <!-- <option value="" disabled selected -->
-                      >How often do you drink?</option
-                    >
-                    <option value="binge">Binge (&#8805; 17 drinks/wk)</option>
-                    <option value="heavy">Heavy (6 to 17 drinks/wk)</option>
-                    <option value="moderate">Moderate (3 to 5 drinks/wk)</option>
-                    <option value="light">Light (0 to 2 drinks/wk)</option>
-                    <option value="occasional">Occasional (&#60; 1 drink/mo)</option>
-                    <option value="no_alcohol" selected>No alcohol in last 12 years</option>
-                  </select>
-                  <label>How often do you drink?</label>
-                </div>
-    
-                <div class="input-field">
-                    <select id="physical_activity" name="physical_activity">
-                    <!-- <option value="" disabled selected>How active are you?</option> -->
-                    <option value="inactive">Inactive</option>
-                    <option value="moderate">Moderately active</option>
-                    <option value="active" selected>Active</option>
-                  </select>
-                  <label>How active are you?</label>
-                </div>
-    
-                <div class="input-field">
-                    <select id="diet" name="diet">
-                    <!-- <option value="" disabled selected>How is your diet?</option> -->
-                    <option value="very_poor">Very poor diet</option>
-                    <option value="poor">Poor diet</option>
-                    <option value="fair">Fair diet</option>
-                    <option value="adequate" selected>Adequate diet</option>
-                  </select>
-                  <label>How is your diet?</label>
-                </div>
-    
-                <div class="input-field">
-                    <select id="stress" name="stress">
-                    <!-- <option value="" disabled selected>How stressed are you?</option> -->
-                    <option value="high">High stress</option>
-                    <option value="low" selected>Low stress</option>
-                  </select>
-                  <label>How stressed are you?</label>
-                </div>
-            </div>
-
-        <div class="modal-footer">
-            <div class="input-field center">
-                <button class="waves-effect waves-light btn-large">Submit</button>
-            </div>
-        </div>
-      </form>
-    </div>
-
-   
-
-
-    <!-- Dashboard -->
-
-    <!-- Tabs -->
-    <!-- <div class="dashboard container orange-text text-darken-3">
-      <div class="row">
-        <div class="col s12">
-          <ul id="swipeable-tab" class="tabs">
-            <li class="tab col s6"><a class="active" href="#test1">Test 1</a></li>
-            <li class="tab col s6"><a href="#test2">Test 2</a></li>
-          </ul>
-        </div>
-        <div id="test1" class="col s12">
-          <canvas id="mainChart" width="400" height="400"></canvas>
-        </div>
-        <div id="test2" class="col s12">Test 2</div>
-      </div>      
-    </div> -->
-    <div class="dashboard container orange-text text-darken-3">
-      <div class="row">
-        <h5 class="schedule-title col s12 center">Your time is <span id='total-time'></span></h5>
-    </div>
-
-    <div class="dash-comp row">
-      <div class="col s12">
-        <div class="life-bar life-bar-moved">
-          <span class="life-bar-value"></span>
-          <div class="life-bar-fill"></div>
-        </div>
         
-          <!-- <canvas id="myChart" width="400" height="200"></canvas> -->
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="date_of_birth" type="text" class="datepicker" name="date_of_birth" required=""/>
+                      <label for="date_of_birth">Date of birth</label>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col s12">
+                        <div id="unit-switch" class="switch" name="unit-switch">
+                          <label>
+                            Imperial
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            Metric
+                          </label>
+                        </div>
+                    </div>
+                  </div>
+      
+                  <div class="row">
+                    <div id="imperial" style="display:block">
+                      <div class="input-field with-unit col s3 m3">
+                        <input id="imperial-height-ft" placeholder="ft" name="imperial-height-ft" type="number" min="1" max="10" class="validate" required=""/>
+                        <label for="height">Height</label>  
+                      </div>
+                      <div class="input-field with-unit col s3 m3">
+                        <input id="imperial-height-in" placeholder="in" name="imperial-height-in" type="number" min="0" max="11" class="validate" required=""/>
+                      </div>
+                    
+                      <div class="input-field with-unit col s6 m6">
+                        <input id="imperial-weight" placeholder="lbs" name="imperial-weight" type="number" min="0" max="700" class="validate" required=""/>
+                        <label for="weight">weight</label>
+                      </div>
+                    </div>
+                
+                    <div id="metric" style="display:none">
+                      <div class="input-field with-unit col s6 m6">
+                        <input id="metric-height" placeholder="cm" name="height" type="number" min="50" max="250" class="validate"/>
+                        <label for="height">Height</label>  
+                      </div>
+                    
+                      <div class="input-field with-unit col s6 m6">
+                        <input id="metric-weight" placeholder="kg" name="weight" type="number" min="0" max="300" class="validate"/>
+                        <label for="weight">weight</label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="input-field">
+                    <select type="select" id="smoking" name="smoking">
+                      <!-- <option value="" disabled selected>Do you smoke?</option> -->
+                      <option value="heavy">Heavy (&#8805; 1 pack/day)</option>
+                      <option value="light">Light (&#60; 1 pack/day)</option>
+                      <option value="former">Former smoker</option>
+                      <option value="never" selected>Never smoked</option>
+                    </select>
+                    <label>Do you smoke?</label>
+                  </div>
+      
+                  <div class="input-field">
+                      <select id="alcohol" name="alcohol">
+                      <!-- <option value="" disabled selected -->
+                        >How often do you drink?</option
+                      >
+                      <option value="binge">Binge (&#8805; 17 drinks/wk)</option>
+                      <option value="heavy">Heavy (6 to 17 drinks/wk)</option>
+                      <option value="moderate">Moderate (3 to 5 drinks/wk)</option>
+                      <option value="light">Light (0 to 2 drinks/wk)</option>
+                      <option value="occasional">Occasional (&#60; 1 drink/mo)</option>
+                      <option value="no_alcohol" selected>No alcohol in last 12 years</option>
+                    </select>
+                    <label>How often do you drink?</label>
+                  </div>
+      
+                  <div class="input-field">
+                      <select id="physical_activity" name="physical_activity">
+                      <!-- <option value="" disabled selected>How active are you?</option> -->
+                      <option value="inactive">Inactive</option>
+                      <option value="moderate">Moderately active</option>
+                      <option value="active" selected>Active</option>
+                    </select>
+                    <label>How active are you?</label>
+                  </div>
+      
+                  <div class="input-field">
+                      <select id="diet" name="diet">
+                      <!-- <option value="" disabled selected>How is your diet?</option> -->
+                      <option value="very_poor">Very poor diet</option>
+                      <option value="poor">Poor diet</option>
+                      <option value="fair">Fair diet</option>
+                      <option value="adequate" selected>Adequate diet</option>
+                    </select>
+                    <label>How is your diet?</label>
+                  </div>
+      
+                  <div class="input-field">
+                      <select id="stress" name="stress">
+                      <!-- <option value="" disabled selected>How stressed are you?</option> -->
+                      <option value="high">High stress</option>
+                      <option value="low" selected>Low stress</option>
+                    </select>
+                    <label>How stressed are you?</label>
+                  </div>
+              </div>
+
+          <div class="modal-footer">
+              <div class="input-field center">
+                  <button class="waves-effect waves-light btn-large">Submit</button>
+              </div>
+          </div>
+          
+        </form>
       </div>
-    </div>
 
     
 
-    <div class="dash-comp infos row">
-        <div class="col s6 m6 center">
-            <div class="info white">
-              <div class="info-details left">
-                <div class="info-title">Lived</div>
-                <div class="info-date" id="days-lived"></div>
-              </div>
-            </div>
-        </div>
-        <div class="col s6 m6 center">
-            <div class="info white">
-              <div class="info-details right">
-                <div class="info-title">Remaining</div>
-                <div class="info-date" id="days-will-live"></div>
-              </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-      <h5 class="schedule-title col s12 center">Passes by quickly...</h5>
-    </div>
+      <!-- Dashboard -->
 
-      <div class="dash-comp infos row">
-        <div class="col s12 m12 center">
-            <div class="info white">
-              <div class="info-details">
-                <div class="info-date"><span class="Numbers" id="weeks-left"></span> weeks until <span id="current-year">2020</span> </div>
-                
-              </div>
-            </div>
+      <div class="dashboard container orange-text text-darken-3">
+        <div class="row">
+          <h5 class="schedule-title col s12 center">Your time is <span id='total-time'></span></h5>
+      </div>
+
+      <div class="dash-comp row">
+        <div class="col s12">
+          <div class="life-bar life-bar-moved">
+            <span class="life-bar-value"></span>
+            <div class="life-bar-fill"></div>
+          </div>
         </div>
       </div>
-      <div class="dash-comp infos row">
-        <div class="col s12 m12 center">
-            <div class="info white">
-              <div class="info-details">
-                <div class="info-date"><span class="Numbers" id="days-left"></span> days until next Monday</div>
-              </div>
-            </div>
-        </div>
-      </div>    
+
       
+
       <div class="dash-comp infos row">
+          <div class="col s6 m6 center">
+              <div class="info white">
+                <div class="info-details left">
+                  <div class="info-title">Lived</div>
+                  <div class="info-date" id="days-lived"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col s6 m6 center">
+              <div class="info white">
+                <div class="info-details right">
+                  <div class="info-title">Remaining</div>
+                  <div class="info-date" id="days-will-live"></div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <h5 class="schedule-title col s12 center">Passes by quickly...</h5>
+      </div>
+
+        <div class="dash-comp infos row">
           <div class="col s12 m12 center">
               <div class="info white">
                 <div class="info-details">
+                  <div class="info-date"><span class="Numbers" id="weeks-left"></span> weeks until <span id="current-year"></span> </div>
                   
-                  <div class="info-date"><span class="Numbers" id="hr-left"></span><span>h </span><span class="Numbers" id="min-left"></span><span>m </span><span class="Numbers" id="sec-left"></span><span>s</span></div>
                 </div>
-                <!-- <div><span id="milsec-left"></span></div> -->
-                <div class="info-title">Until tomorrow</div>
               </div>
           </div>
-      </div>  
-      
-      
-    
-
-    <div class="row">
-      <h5 class="schedule-title col s12 center">Spend it meaningfully...</h5>
-    </div>
-
-    <div class="center button-style">
-        <a
-        class="sidenav-trigger"
-        data-target="side-form"
-        >
-          <div id="add-something-todo">
-            <span>>>> Add something to do</span>
-          </div>
-        </a>
-    </div>
-      <div class="dash-comp schedules row"></div>
-    </div>
-
-    <div class="center button-style signOutDiv" style="display: none;" onclick="userSignOut()">
-        <div id="add-something-todo">
-          <span>Sign Out</span>
         </div>
+        <div class="dash-comp infos row">
+          <div class="col s12 m12 center">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-date"><span class="Numbers" id="days-left"></span> days until next Monday</div>
+                </div>
+              </div>
+          </div>
+        </div>     
+        <div class="dash-comp infos row">
+            <div class="col s12 m12 center">
+                <div class="info white">
+                  <div class="info-details">
+                    
+                    <div class="info-date"><span class="Numbers" id="hr-left"></span><span>h </span><span class="Numbers" id="min-left"></span><span>m </span><span class="Numbers" id="sec-left"></span><span>s</span></div>
+                  </div>
+                  <!-- <div><span id="milsec-left"></span></div> -->
+                  <div class="info-title">Until tomorrow</div>
+                </div>
+            </div>
+        </div>  
+        <div class="dash-comp infos row">
+          <div class="col s12 m12 center">
+              <div class="info white">
+                <div class="info-details">
+                  <div class="info-date"><span class="Numbers" id="days-left"></span>My today's activity <span class="Numbers" id="activity"> 1 / 3 </span></div>
+                </div>
+              </div>
+          </div>
+        </div>  
+        
+      
+
+      <div class="row">
+        <h5 class="schedule-title col s12 center">Plan & take action today</h5>
+      </div>
+
+      <div class="center button-style">
+          <a
+          class="sidenav-trigger"
+          data-target="side-form"
+          >
+            <div id="add-something-todo">
+              <span>>>> Add something to do</span>
+            </div>
+          </a>
+      </div>
+        <div class="dash-comp schedules row"></div>
+      </div>
+
+      <div class="center button-style signOutDiv" onclick="userSignOut()">
+          <div id="add-something-todo">
+            <span>Sign Out</span>
+          </div>
+      </div>
+    
     </div>
+
+
+
 
     <script src="/js/firebase.js"></script>
     <script>

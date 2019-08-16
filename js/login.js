@@ -53,9 +53,7 @@
       db.collection('users')
         .doc(uid)
         .onSnapshot(doc => {
-          console.log('doc', doc.data());
           if (doc.exists) {
-            renderAbout(doc.data());
             renderDashboard(doc.data());
             loginUI(user);
 

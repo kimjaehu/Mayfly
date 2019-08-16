@@ -1,24 +1,36 @@
-const dashboard = document.querySelector('.dashboard');
-const aboutDiv = document.querySelector('.about');
+// const dashboard = document.querySelector('.dashboard');
+// const aboutDiv = document.querySelector('.about');
 const loginDiv = document.querySelector('.login');
-const signOutDiv = document.querySelector('.signOutDiv');
-const sideNavDiv = document.querySelector('.sidenav');
+// const signOutDiv = document.querySelector('.signOutDiv');
+// const sideNavDiv = document.querySelector('.sidenav');
+const dashboardDiv = document.querySelector('.dashboard-div');
+const unitSwitch = document.getElementById('unit-switch');
+const metric = document.getElementById('metric');
+const imperial = document.getElementById('imperial');
+const imperialHeightFt = document.getElementById('imperial-height-ft');
+const imperialHeightIn = document.getElementById('imperial-height-in');
+const imperialWeight = document.getElementById('imperial-weight');
+const metricHeight = document.getElementById('metric-height');
+const metricWeight = document.getElementById('metric-weight');
+
 const loginUI = user => {
   if (user) {
     loginDiv.style.display = 'none';
+    dashboardDiv.style.display = 'block';
     // loginDiv.style.hidden = true;
     // aboutDiv.style.display = 'block';
-    dashboard.style.display = 'block';
-    signOutDiv.style.display = 'block';
-    sideNavDiv.style.display = 'block';
+    // dashboard.style.display = 'block';
+    // signOutDiv.style.display = 'block';
+    // sideNavDiv.style.display = 'block';
     // dashboard.style.hidden = false;
   } else {
     loginDiv.style.display = 'block';
+    dashboardDiv.style.display = 'none';
     // loginDiv.style.hidden = false;
     // aboutDiv.style.display = 'none';
-    dashboard.style.display = 'none';
-    signOutDiv.style.display = 'none';
-    sideNavDiv.style.display = 'none';
+    // dashboard.style.display = 'none';
+    // signOutDiv.style.display = 'none';
+    // sideNavDiv.style.display = 'none';
     // dashboard.style.hidden = true;
   }
 };
@@ -32,16 +44,37 @@ document.addEventListener('DOMContentLoaded', function() {
   M.Sidenav.init(scheduleForms, { edge: 'left', closeOnClick: true });
 });
 
-const aboutUI = user => {};
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.datepicker');
+  var instances = M.Datepicker.init(elems, {
+    autoClose: true,
+    disableDayFn: day => {
+      return day.valueOf() > new Date().valueOf();
+    }
+  });
+});
 
-const unitSwitch = document.getElementById('unit-switch');
-const metric = document.getElementById('metric');
-const imperial = document.getElementById('imperial');
-const imperialHeightFt = document.getElementById('imperial-height-ft');
-const imperialHeightIn = document.getElementById('imperial-height-in');
-const imperialWeight = document.getElementById('imperial-weight');
-const metricHeight = document.getElementById('metric-height');
-const metricWeight = document.getElementById('metric-weight');
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.datepicker-add');
+  var instances = M.Datepicker.init(elems, {
+    autoClose: true,
+    disableDayFn: day => {
+      return day.valueOf() + 86400000 < new Date().valueOf();
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.timepicker-add');
+  var instances = M.Timepicker.init(elems, {
+    autoClose: true
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, {});
+});
 
 unitSwitch.addEventListener('click', e => {
   if (e.target.checked) {
@@ -144,7 +177,7 @@ const renderDashboard = data => {
   const age = today.diff(dateOfBirth, 'years', true);
   const percentage = Math.floor((age / total) * 100 + 0.5);
 
-  totalTime.innerHTML = data.life_expectancy + 'years';
+  totalTime.innerHTML = Math.floor(data.life_expectancy) + ' years';
 
   const id = setInterval(frame, 10);
   let width = 10;
@@ -275,76 +308,29 @@ const closeModal = () => {
   instance.close();
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.datepicker');
-  var instances = M.Datepicker.init(elems, {
-    autoClose: true,
-    disableDayFn: day => {
-      return day.valueOf() > new Date().valueOf();
-    }
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.datepicker-add');
-  var instances = M.Datepicker.init(elems, {
-    autoClose: true,
-    disableDayFn: day => {
-      return day.valueOf() <= new Date().valueOf();
-    }
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, {});
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var elem = document.querySelectorAll('.tabs');
-  var instance = M.Tabs.init(elem, { swipeable: true });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.collapsible');
-  var instances = M.Collapsible.init(elems, {});
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var elem = document.getElementById('swipeable-tab');
-  var instance = M.Tabs.init(elem, { swipeable: true });
-});
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   var elem = document.getElementById('country');
-//   var instance = M.Autocomplete.init(elem, { data });
-// });
-
 // render schedule
 const schedules = document.querySelector('.schedules');
 const renderSchedule = (data, id) => {
   return new Promise(resolve => {
-    const scheduleFrom = data.from.toDate();
+    const scheduleFrom = data.from;
     const formattedFrom = moment(scheduleFrom).format('MMM. DD, YYYY, hh:mm a');
-    const scheduleTo = data.to.toDate();
+    const scheduleTo = data.to;
     const formattedTo = moment(scheduleTo).format('MMM. DD, YYYY, hh:mm a');
     let html = `
-    <div class="col s12 m12 l6">
+    <div class="col s12 m12 l6 added-schedule">
       <div class="card-panel schedule white" data-id="${id}">
-          <i class="medium material-icons">${data.icon}</i>
         <div class="schedule-details">
-          <div class="schedule-title">${data.title}</div>
+          <div class="schedule-desc">${data.title}</div>
           <div class="schedule-from">${formattedFrom}</div>
           <div class="schedule-to">${formattedTo}</div>
         </div>
-        <div class="schedule-countdown">agddas</div>
+        <!-- <div class="schedule-countdown">agddas</div> --!>
         <div class="schedule-delete">
           <i class="material-icons" data-id="${id}">delete_outline</i>
         </div>
       </div>
     </div>
     `;
-    console.log(html);
     resolve((schedules.innerHTML += html));
   });
 };

@@ -35,30 +35,6 @@ $.ajax({
     ipv4 = '0.0.0.0';
   }
 });
-// real time listener
-// console.log('asdgasdg', firebase.auth().currentUser);
-// if (firebase.auth().currentUser) {
-//   console.log('asdgasdga', firebase.auth().currentUser);
-//   // db.collection('users')
-//   //   // .doc(firebase.auth().currentUser.uid)
-//   //   // .collection('schedules')
-//   //   // .doc(firebase.auth().currentUser.uid)
-//   //   .onSnapshot(snapshot => {
-//   //     console.log('2 this code ran');
-//   //     console.log('snapshot', snapshot.docChanges());
-//   //     // snapshot.docChanges().forEach(change => {
-//   //     //   // console.log(change, change.doc.data(), change.doc.id);
-//   //     //   if (change.type === 'added') {
-//   //     //     // add data to web page
-//   //     //     renderRecipe(change.doc.data(), change.doc.id);
-//   //     //   }
-//   //     //   if (change.type === 'removed') {
-//   //     //     //remove data from web page
-//   //     //     removeRecipe(change.doc.id);
-//   //     //   }
-//   //     // });
-//   //   });
-// }
 
 // add new about
 const form = document.getElementById('about-form');
@@ -297,33 +273,41 @@ const renderAbout = data => {
 };
 
 //add new schedule
-// const scheduleForm = document.getElementById('schedule-form');
+const scheduleForm = document.getElementById('schedule-form');
+scheduleForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const from = moment(
+    scheduleForm.date.value + ' ' + scheduleForm.time.value
+  ).format();
+  const duration = scheduleForm.duration.value;
+  const to = moment(from)
+    .add(duration, 'minutes')
+    .format();
+  const schedule = {
+    from: from,
+    to: to,
+    title: scheduleForm.title.value
+  };
 
-// scheduleForm.addEventListener('submit', e => {
-//   e.preventDefault;
+  db.collection('users')
+    .doc(firebase.auth().currentUser.uid)
+    .collection('schedules')
+    .doc()
+    .set(schedule)
+    .then(() => {
+      console.log('schedule created');
+    });
+});
 
-//   const schedule = {
-//     from: form.from.value,
-//     to: form.to.value,
-//     title: form.title.value
-//   };
-//   console.log(schedule);
-//   db.collection('users')
-//     .doc(firebase.auth().currentUser.uid)
-//     .set(schedule)
-//     .then(() => {
-//       console.log('schedule created');
-//     });
-// });
-
-// remove recipe
-// const recipeContainer = document.querySelector('.about');
-// recipeContainer.addEventListener('click', e => {
-//   console.log(e);
-//   // if (e.target.tagName === 'I') {
-//   //   const id = e.target.getAttribute('data-id');
-//   //   db.collection('recipes')
-//   //     .doc(id)
-//   //     .delete();
-//   // }
-// });
+// remove schedule
+const scheduleContainer = document.querySelector('.schedules');
+scheduleContainer.addEventListener('click', e => {
+  if (e.target.tagName === 'I') {
+    const id = e.target.getAttribute('data-id');
+    db.collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .collection('schedules')
+      .doc(id)
+      .delete();
+  }
+});

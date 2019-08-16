@@ -1,4 +1,3 @@
-/* colours */
 :root {
   --primary: #ffe9d2;
   --secondary: #ffe1c4;
@@ -11,11 +10,10 @@ body {
 }
 
 .schedule-title {
-  margin-top: 2em;
+  margin-top: 1.5em;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
-
 /* layout styles */
 nav {
   background: var(--primary);
@@ -41,8 +39,8 @@ nav .sidenav-trigger {
   padding: 10px;
   box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
   display: grid;
-  grid-template-columns: 2fr 5fr 3fr 1fr;
-  grid-template-areas: 'image details countdown delete';
+  grid-template-columns: 5fr 3fr 1fr;
+  grid-template-areas: 'details countdown delete';
   position: relative;
 }
 .schedule img {
@@ -60,11 +58,13 @@ nav .sidenav-trigger {
   right: 0px;
 }
 .schedule-countdown {
+  grid-area: countdown;
+  margin-top: 6px;
 }
 .schedule-delete i {
   font-size: 18px;
 }
-.schedule-title {
+.schedule-desc {
   font-weight: bold;
 }
 .schedule-from {
@@ -76,6 +76,10 @@ nav .sidenav-trigger {
 }
 
 /* form-styles */
+.timepicker-modal {
+  width: 100%;
+}
+
 .add-btn {
   background: var(--title) !important;
 }
@@ -91,6 +95,14 @@ input {
   margin: 1.5rem 0 0 0;
   padding: 0;
 } */
+
+.login-title {
+  margin-top: 25%;
+  margin-bottom: 25%;
+  font-size: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+}
 
 .title {
   font-size: 2rem;
@@ -169,6 +181,8 @@ input {
 }
 
 h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
   color: #069;
 }
 
