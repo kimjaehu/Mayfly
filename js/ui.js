@@ -58,9 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.datepicker-add');
   var instances = M.Datepicker.init(elems, {
     autoClose: true,
-    disableDayFn: day => {
-      return day.valueOf() + 86400000 < new Date().valueOf();
-    }
+    minDate: new Date(),
+    maxDate: new Date(Date.now() + 24 * 60 * 60 * 1000)
+    // disableDayFn: day => {
+    //   return day.valueOf() + 86400000 != new Date().valueOf()
+    // }
   });
 });
 
@@ -310,6 +312,7 @@ const closeModal = () => {
 
 // render schedule
 const schedules = document.querySelector('.schedules');
+
 const renderSchedule = (data, id) => {
   return new Promise(resolve => {
     const scheduleFrom = data.from;
@@ -317,8 +320,8 @@ const renderSchedule = (data, id) => {
     const scheduleTo = data.to;
     const formattedTo = moment(scheduleTo).format('MMM. DD, YYYY, hh:mm a');
     let html = `
-    <div class="col s12 m12 l6 added-schedule">
-      <div class="card-panel schedule white" data-id="${id}">
+    <div class="col s12 m12 l6">
+      <div class="card-panel added-schedule schedule white" data-id="${id}">
         <div class="schedule-details">
           <div class="schedule-desc">${data.title}</div>
           <div class="schedule-from">${formattedFrom}</div>
@@ -331,6 +334,7 @@ const renderSchedule = (data, id) => {
       </div>
     </div>
     `;
+    
     resolve((schedules.innerHTML += html));
   });
 };
@@ -339,4 +343,13 @@ const renderSchedule = (data, id) => {
 const removeSchedule = id => {
   const schedule = document.querySelector(`.schedule[data-id = ${id}]`);
   schedule.remove();
+};
+
+//count div in schedule
+const countSchedule = () => {
+  const scheduleList = document.querySelectorAll('.schedule-from');
+  const todayList = scheduleList.filter(list => {
+    list.innerHTML === new Date();
+  });
+  console.log(todayList.length);
 };

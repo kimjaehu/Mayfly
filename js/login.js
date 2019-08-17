@@ -66,9 +66,10 @@
                     await renderSchedule(change.doc.data(), change.doc.id);
                   }
                   if (change.type === 'removed') {
-                    removeSchedule(change.doc.id);
+                    await removeSchedule(change.doc.id);
                   }
                 });
+                countSchedule();
               });
           } else {
             console.log('new create');
